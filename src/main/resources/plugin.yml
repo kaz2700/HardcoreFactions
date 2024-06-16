@@ -4,3 +4,5 @@ main: me.kazuto.hcf.Main
 description: Hardcore factions
 author: KazutoXD
 api-version: '1.20.6'
+commands:
+  f:
