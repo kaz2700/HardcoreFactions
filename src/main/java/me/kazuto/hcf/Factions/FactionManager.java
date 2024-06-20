@@ -28,6 +28,11 @@ public class FactionManager {
         return null;
     }
 
+    public void deleteFaction(Faction faction) {
+        assert(factions.contains(faction));
+        factions.remove(faction);
+    }
+
     private static FactionManager instance;
     public static FactionManager getInstance() {
         if(instance == null)

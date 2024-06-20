@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerFaction extends Faction {
     @Getter
@@ -63,4 +64,13 @@ public class PlayerFaction extends Faction {
         }
         return String.format("Faction: %s\nPlayers:%s", getName(), listOfPlayerNames);
     }
+
+    public List<FactionPlayer> getOnlinePlayers() {
+        return getFactionPlayers().stream().filter(FactionPlayer::isOnline).toList();
+    }
+
+    public boolean isOnline() {
+        return !getOnlinePlayers().isEmpty();
+    }
+
 }

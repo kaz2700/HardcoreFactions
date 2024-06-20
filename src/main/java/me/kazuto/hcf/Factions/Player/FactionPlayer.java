@@ -49,4 +49,8 @@ public class FactionPlayer {
     public boolean hasAFaction() {
         return getFaction() != null;
     }
+
+    public boolean isOnline() {
+        return getOfflinePlayer().isOnline();
+    }
 }
