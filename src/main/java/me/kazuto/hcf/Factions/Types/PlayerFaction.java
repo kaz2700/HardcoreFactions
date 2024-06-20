@@ -5,6 +5,7 @@ import lombok.Setter;
 import me.kazuto.hcf.Factions.Faction;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
 
@@ -54,7 +55,11 @@ public class PlayerFaction extends Faction {
     public String getInfo() {
         StringBuilder listOfPlayerNames = new StringBuilder();
         for(FactionPlayer factionPlayer : getFactionPlayers()) {
-            listOfPlayerNames.append(" ").append(factionPlayer.getName());
+            ChatColor color = ChatColor.GRAY;
+            if(factionPlayer.getOfflinePlayer().isOnline()) {
+                color = ChatColor.GREEN;
+            }
+            listOfPlayerNames.append(color).append(" ").append(factionPlayer.getName());
         }
         return String.format("Faction: %s\nPlayers:%s", getName(), listOfPlayerNames);
     }
