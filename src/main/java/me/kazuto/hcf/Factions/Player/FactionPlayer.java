@@ -35,11 +35,11 @@ public class FactionPlayer {
         this.setBalance(100);
     }
 
-    public OfflinePlayer offlinePlayer() {
+    public OfflinePlayer getOfflinePlayer() {
         return Bukkit.getOfflinePlayer(getUuid());
     }
     public String getName() {
-        return offlinePlayer().getName();
+        return getOfflinePlayer().getName();
     }
 
     public PlayerFaction getFaction() {
