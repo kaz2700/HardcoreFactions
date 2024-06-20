@@ -1,0 +1,7 @@
+shiemin
+
+commands
+kits
+in n out of claim
+make chat pretty
+events (koths, sotw, eotw, )

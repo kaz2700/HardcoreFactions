@@ -5,4 +5,6 @@ description: Hardcore factions
 author: KazutoXD
 api-version: '1.20.6'
 commands:
-  f:
+  faction:
+    aliases: [ f, t, team, squad, F ]
+    description: Faction commands.

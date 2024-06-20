@@ -1,12 +1,14 @@
-package me.kazuto.hcf.Faction;
+package me.kazuto.hcf.Factions.Types;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.kazuto.hcf.Player.FactionPlayer;
+import me.kazuto.hcf.Factions.Faction;
+import me.kazuto.hcf.Factions.Player.FactionPlayer;
+import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 
-public class PlayerFaction extends Faction{
+public class PlayerFaction extends Faction {
     @Getter
     ArrayList<FactionPlayer> factionPlayers = new ArrayList<>();
 
@@ -46,5 +48,14 @@ public class PlayerFaction extends Faction{
     public void removeFactionPlayer(FactionPlayer factionPlayer) {
         assert(factionPlayers.contains(factionPlayer));
         factionPlayers.remove(factionPlayer);
+    }
+
+    @Override
+    public String getInfo() {
+        StringBuilder listOfPlayerNames = new StringBuilder();
+        for(FactionPlayer factionPlayer : getFactionPlayers()) {
+            listOfPlayerNames.append(" ").append(factionPlayer.getName());
+        }
+        return String.format("Faction: %s\nPlayers:%s", getName(), listOfPlayerNames);
     }
 }

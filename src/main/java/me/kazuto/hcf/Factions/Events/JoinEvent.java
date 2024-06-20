@@ -1,7 +1,6 @@
-package me.kazuto.hcf.Events;
+package me.kazuto.hcf.Factions.Events;
 
-import me.kazuto.hcf.Player.FactionPlayerManager;
-import org.bukkit.entity.Player;
+import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -12,6 +11,7 @@ public class JoinEvent implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
+        event.setJoinMessage("");
         UUID uuid = event.getPlayer().getUniqueId();
         if(FactionPlayerManager.getInstance().getFactionPlayerFromUUID(uuid) == null)
             FactionPlayerManager.getInstance().createFactionPlayer(uuid);

@@ -1,9 +1,13 @@
-package me.kazuto.hcf.Player;
+package me.kazuto.hcf.Factions.Player;
+
+import lombok.Getter;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class FactionPlayerManager {
+    @Getter
     ArrayList<FactionPlayer> factionPlayers = new ArrayList<>();
 
     public void createFactionPlayer(UUID uuid) {

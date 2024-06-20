@@ -1,7 +1,8 @@
-package me.kazuto.hcf.Faction;
+package me.kazuto.hcf.Factions;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 
 public class Faction {
     @Getter
@@ -11,5 +12,9 @@ public class Faction {
     //isbreakable
     public Faction(String name) {
         this.name = name;
+    }
+
+    public String getInfo() {
+        return String.format("Faction: %s", getName());
     }
 }
