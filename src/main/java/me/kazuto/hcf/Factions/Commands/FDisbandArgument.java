@@ -10,8 +10,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-
 public class FDisbandArgument extends CommandArgument {
 
     public FDisbandArgument() {
@@ -26,7 +24,7 @@ public class FDisbandArgument extends CommandArgument {
         }
 
         Player player = (Player) commandSender;
-        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getFactionPlayerFromUUID(player.getUniqueId());
+        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
         if(!factionPlayer.hasAFaction()) {
             player.sendMessage(String.format("%s%sYou are not in a faction.", Config.ERROR_COLOR, Config.ERROR_PREFIX));

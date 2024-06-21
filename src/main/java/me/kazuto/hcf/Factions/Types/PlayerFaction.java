@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import me.kazuto.hcf.Factions.Faction;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
@@ -12,10 +11,10 @@ import java.util.List;
 
 public class PlayerFaction extends Faction {
     @Getter
-    ArrayList<FactionPlayer> factionPlayers = new ArrayList<>();
+    ArrayList<FactionPlayer> players = new ArrayList<>();
 
     @Getter
-    ArrayList<FactionPlayer> invitedFactionPlayers = new ArrayList<>();
+    ArrayList<FactionPlayer> invitedPlayers = new ArrayList<>();
 
     @Getter
     @Setter
@@ -33,29 +32,39 @@ public class PlayerFaction extends Faction {
     @Setter
     FactionPlayer leader;
 
+    @Getter
+    @Setter
+    boolean isFOpen;
+
     public PlayerFaction(String name, FactionPlayer leader) {
         super(name);
         this.leader = leader;
-        addFactionPlayer(leader);
+        addPlayer(leader);
     }
-    public void inviteFactionPlayer(FactionPlayer factionPlayer) {
-        assert(!invitedFactionPlayers.contains(factionPlayer));
-        invitedFactionPlayers.add(factionPlayer);
-    }
-    public void addFactionPlayer(FactionPlayer factionPlayer) {
-        assert(!factionPlayers.contains(factionPlayer));
-        factionPlayers.add(factionPlayer);
+    public void invitePlayer(FactionPlayer factionPlayer) {
+        assert(!invitedPlayers.contains(factionPlayer));
+        invitedPlayers.add(factionPlayer);
     }
 
-    public void removeFactionPlayer(FactionPlayer factionPlayer) {
-        assert(factionPlayers.contains(factionPlayer));
-        factionPlayers.remove(factionPlayer);
+    public void uninvitePlayer(FactionPlayer factionPlayer) {
+        assert(invitedPlayers.contains(factionPlayer));
+        invitedPlayers.remove(factionPlayer);
+    }
+
+    public void addPlayer(FactionPlayer factionPlayer) {
+        assert(!players.contains(factionPlayer));
+        players.add(factionPlayer);
+    }
+
+    public void removePlayer(FactionPlayer factionPlayer) {
+        assert(players.contains(factionPlayer));
+        players.remove(factionPlayer);
     }
 
     @Override
     public String getInfo() {
         StringBuilder listOfPlayerNames = new StringBuilder();
-        for(FactionPlayer factionPlayer : getFactionPlayers()) {
+        for(FactionPlayer factionPlayer : getPlayers()) {
             ChatColor color = ChatColor.GRAY;
             if(factionPlayer.getOfflinePlayer().isOnline()) {
                 color = ChatColor.GREEN;
@@ -66,11 +75,10 @@ public class PlayerFaction extends Faction {
     }
 
     public List<FactionPlayer> getOnlinePlayers() {
-        return getFactionPlayers().stream().filter(FactionPlayer::isOnline).toList();
+        return getPlayers().stream().filter(FactionPlayer::isOnline).toList();
     }
 
     public boolean isOnline() {
         return !getOnlinePlayers().isEmpty();
     }
-
 }

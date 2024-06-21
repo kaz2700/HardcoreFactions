@@ -31,7 +31,7 @@ public class FWhoArgument extends CommandArgument {
                 }
 
                 Player player = (Player) commandSender;
-                FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getFactionPlayerFromUUID(player.getUniqueId());
+                FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
                 if (FactionManager.getInstance().getFactionFromPlayer(factionPlayer) == null) {
                     player.sendMessage(String.format("%s%sYou are not in a faction.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
@@ -44,7 +44,7 @@ public class FWhoArgument extends CommandArgument {
 
             case 2:
                 StringBuilder output = new StringBuilder();
-                for(FactionPlayer factionPlayer1 : FactionPlayerManager.getInstance().getFactionPlayers()) {
+                for(FactionPlayer factionPlayer1 : FactionPlayerManager.getInstance().getPlayers()) {
                     if(factionPlayer1.getName().equalsIgnoreCase(strings[1]) && factionPlayer1.hasAFaction()) {
                         output.append(FactionManager.getInstance().getFactionFromPlayer(factionPlayer1).getInfo());
                     }
