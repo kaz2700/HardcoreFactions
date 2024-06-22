@@ -18,15 +18,9 @@ public class Kit {
     @Getter
     private ItemStack[] armor;
 
-    @Getter
-    private ArrayList<Player> players;
     public Kit(String name, List<PotionEffect> effects, ItemStack[] armor) {
         this.name = name;
         this.effects = effects;
         this.armor = armor;
-    }
-
-    public void addPlayers(Player player) {
-        players.add(player);
     }
 }
