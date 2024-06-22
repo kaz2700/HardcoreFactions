@@ -6,9 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Bard extends Kit {
     private static PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, -1, 1);

@@ -1,6 +1,7 @@
 package me.kazuto.hcf;
 
 import org.bukkit.ChatColor;
+
 public class Config {
     public static String ERROR_PREFIX = "Wrong usage. ";
 

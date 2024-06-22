@@ -12,3 +12,8 @@ command f openinvite <player>
 cooldown on invite and uninvite a player
 f invites
 cooldown on commands
+kamikze kit
+tnt tag kit
+info player
+bard effect so niggas levitate except kits maybe??? idk think
+armadillo kit pushes niggas when hit

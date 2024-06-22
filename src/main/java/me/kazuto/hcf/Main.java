@@ -4,6 +4,7 @@ import me.kazuto.hcf.Factions.Events.ChatEvent;
 import me.kazuto.hcf.Factions.Events.JoinEvent;
 import me.kazuto.hcf.Factions.Commands.FactionExecutor;
 import me.kazuto.hcf.Kits.KitListener;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
