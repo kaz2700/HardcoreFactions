@@ -10,7 +10,8 @@ public class FactionExecutor extends ArgumentExecutor {
         addArgument(new FListArgument());
         addArgument(new FInviteArgument());
         addArgument(new FUninviteArgument());
-
+        addArgument(new FOpenArgument());
+        addArgument(new FCloseArgument());
     }
 }
-//todo if command is only f then show hlep
+//todo if command is only f then show hel.p

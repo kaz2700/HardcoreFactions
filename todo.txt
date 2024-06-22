@@ -1,5 +1,6 @@
 shiemin
 
+captains n coleaders?
 kits
 in n out of claim
 make chat pretty
@@ -9,3 +10,5 @@ mundial of factions
 faction invites remove after 24h
 command f openinvite <player>
 cooldown on invite and uninvite a player
+f invites
+cooldown on commands

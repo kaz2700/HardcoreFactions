@@ -81,4 +81,9 @@ public class PlayerFaction extends Faction {
     public boolean isOnline() {
         return !getOnlinePlayers().isEmpty();
     }
+
+    public void broadcastMessage(String message) {
+        for(FactionPlayer factionPlayer : getOnlinePlayers())
+            factionPlayer.getOfflinePlayer().getPlayer().sendMessage(message);
+    }
 }

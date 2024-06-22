@@ -24,7 +24,18 @@ public class FInviteArgument extends CommandArgument {
         }
 
         FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
+
+        if(FactionPlayerManager.getInstance().getPlayerFromName(strings[1]) == null) {
+            player.sendMessage(String.format("%s%sThat player never joined the server.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
+            return false;
+        }
+
         FactionPlayer invitedFactionPlayer = FactionPlayerManager.getInstance().getPlayerFromName(strings[1]);
+
+        if(!factionPlayer.hasAFaction()) {
+            player.sendMessage(String.format("%s%sYou are not in a faction.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
+            return false;
+        }
 
         PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
 
