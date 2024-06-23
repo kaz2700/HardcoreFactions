@@ -14,7 +14,7 @@ public class Test implements CommandExecutor {
         if(!(sender instanceof Player player))
             return false;
 
-        FactionPlayerManager.getInstance().getNearByPlayers(player, 5).stream().forEach(player1 -> Bukkit.broadcastMessage("player: " + player1.getName()));
+        FactionPlayerManager.getInstance().getNearByPlayers(player, 5, true).stream().forEach(player1 -> Bukkit.broadcastMessage("player: " + player1.getName()));
         return true;
     }
 }

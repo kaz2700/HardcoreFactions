@@ -14,6 +14,7 @@ public class KitListener implements Listener {
     @EventHandler
     public void onArmorChange(PlayerArmorChangeEvent event) {
         Player player = event.getPlayer();
+        Bukkit.broadcastMessage("asf");
         Kit currentKit = KitManager.getInstance().getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
 
         if(currentKit == null) {
@@ -24,6 +25,9 @@ public class KitListener implements Listener {
             }
             return;
         }
+
+        if(KitManager.getInstance().getKitFromPlayer(player) == currentKit)
+            return;
 
         KitManager.getInstance().addToPlayerKits(player, currentKit);
         player.sendMessage(String.format("%sSwitched to %s kit.", Config.SUCCESS_COLOR, currentKit.getName()));

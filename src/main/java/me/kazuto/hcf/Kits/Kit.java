@@ -1,6 +1,7 @@
 package me.kazuto.hcf.Kits;
 
 import lombok.Getter;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -16,9 +17,9 @@ public class Kit {
     private List<PotionEffect> effects;
 
     @Getter
-    private ItemStack[] armor;
+    private Material[] armor;
 
-    public Kit(String name, List<PotionEffect> effects, ItemStack[] armor) {
+    public Kit(String name, List<PotionEffect> effects, Material[] armor) {
         this.name = name;
         this.effects = effects;
         this.armor = armor;

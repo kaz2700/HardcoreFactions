@@ -33,8 +33,13 @@ public class FactionPlayerManager {
         return null;
     }
 
-    public List<Player> getNearByPlayers(Player player, int radius) {
-        return Bukkit.getWorld(player.getWorld().getUID()).getPlayers().stream().filter(player1 -> player1.getLocation().distance(player.getLocation()) < radius).toList();
+    public List<Player> getNearByPlayers(Player player, int radius, boolean ignoreSelf) {
+        return Bukkit.getWorld(player.getWorld().getUID()).getPlayers().stream()
+                .filter(player1 -> {
+                    boolean withinRadius = player1.getLocation().distance(player.getLocation()) < radius;
+                    boolean isNotSelf = ignoreSelf ? !player1.getUniqueId().equals(player.getUniqueId()) : true;
+                    return withinRadius && isNotSelf;
+                }).toList();
     }
 
 

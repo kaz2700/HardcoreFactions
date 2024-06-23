@@ -3,6 +3,7 @@ package me.kazuto.hcf.Kits;
 import lombok.Getter;
 import me.kazuto.hcf.Kits.Types.Bard;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -46,9 +47,14 @@ public class KitManager {
     }
 
     public Kit getKitFromArmor(ItemStack[] armor) {
-        for (Kit kit : getKits())
-            if (Arrays.equals(armor, kit.getArmor()))
-                return kit;
+        for (Kit kit : getKits()) {
+            for (int i = 0; i < armor.length; i++) {
+                if (armor[i] == null || armor[i].getType() != kit.getArmor()[i])
+                    break;
+                if(i == 3)
+                    return kit;
+            }
+        }
         return null;
     }
 

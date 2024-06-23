@@ -5,6 +5,7 @@ import me.kazuto.hcf.Factions.Events.ChatEvent;
 import me.kazuto.hcf.Factions.Events.JoinEvent;
 import me.kazuto.hcf.Factions.Commands.FactionExecutor;
 import me.kazuto.hcf.Kits.KitListener;
+import me.kazuto.hcf.Kits.Types.Bard;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -28,7 +29,9 @@ public class Main extends JavaPlugin implements Listener {
     public void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new ChatEvent(), this);
+
         Bukkit.getPluginManager().registerEvents(new KitListener(), this);
+        Bukkit.getPluginManager().registerEvents(new Bard(), this);
     }
     public void registerCommands() {
         this.getCommand("f").setExecutor(new FactionExecutor());
