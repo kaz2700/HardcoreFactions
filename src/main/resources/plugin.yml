@@ -8,3 +8,4 @@ commands:
   faction:
     aliases: [ f, t, team, squad, F ]
     description: Faction commands.
+  test:

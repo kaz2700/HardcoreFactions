@@ -1,8 +1,13 @@
 package me.kazuto.hcf.Factions.Player;
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class FactionPlayerManager {
@@ -26,6 +31,10 @@ public class FactionPlayerManager {
             if(factionPlayer.getName().equalsIgnoreCase(name))
                 return factionPlayer;
         return null;
+    }
+
+    public List<Player> getNearByPlayers(Player player, int radius) {
+        return Bukkit.getWorld(player.getWorld().getUID()).getPlayers().stream().filter(player1 -> player1.getLocation().distance(player.getLocation()) < radius).toList();
     }
 
 

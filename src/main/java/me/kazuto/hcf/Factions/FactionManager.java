@@ -32,6 +32,13 @@ public class FactionManager {
         factions.remove(faction);
     }
 
+    public PlayerFaction getFactionFromName(String name) {
+        for(PlayerFaction playerFaction : getPlayerFactions())
+            if(playerFaction.getName().equalsIgnoreCase(name))
+                return playerFaction;
+        return null;
+    }
+
     private static FactionManager instance;
     public static FactionManager getInstance() {
         if(instance == null)

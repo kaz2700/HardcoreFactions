@@ -5,6 +5,7 @@ import lombok.Setter;
 import me.kazuto.hcf.Factions.Faction;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,9 +66,9 @@ public class PlayerFaction extends Faction {
     public String getInfo() {
         StringBuilder listOfPlayerNames = new StringBuilder();
         for(FactionPlayer factionPlayer : getPlayers()) {
-            NamedTextColor color = NamedTextColor.GRAY;
+            ChatColor color = ChatColor.GRAY;
             if(factionPlayer.getOfflinePlayer().isOnline()) {
-                color = NamedTextColor.GREEN;
+                color = ChatColor.GREEN;
             }
             listOfPlayerNames.append(color).append(" ").append(factionPlayer.getName());
         }

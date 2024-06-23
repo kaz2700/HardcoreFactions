@@ -1,5 +1,6 @@
 package me.kazuto.hcf;
 
+import me.kazuto.hcf.Commands.Test;
 import me.kazuto.hcf.Factions.Events.ChatEvent;
 import me.kazuto.hcf.Factions.Events.JoinEvent;
 import me.kazuto.hcf.Factions.Commands.FactionExecutor;
@@ -31,5 +32,6 @@ public class Main extends JavaPlugin implements Listener {
     }
     public void registerCommands() {
         this.getCommand("f").setExecutor(new FactionExecutor());
+        this.getCommand("test").setExecutor(new Test());
     }
 }

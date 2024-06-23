@@ -9,6 +9,7 @@ public class FactionExecutor extends ArgumentExecutor {
         addArgument(new FDisbandArgument());
         addArgument(new FListArgument());
         addArgument(new FInviteArgument());
+        addArgument(new FJoinArgument());
         addArgument(new FUninviteArgument());
         addArgument(new FOpenArgument());
         addArgument(new FCloseArgument());
