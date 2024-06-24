@@ -17,7 +17,7 @@ public class KitManager {
     private HashMap<Player, Kit> playerKits = new HashMap<>();
 
     @Getter
-    private List<Kit> kits = List.of(new Bard());
+    private List<Kit> kits = List.of(Bard.getInstance());
 
     public Kit getKitFromPlayer(Player player) {
         return playerKits.get(player);
@@ -27,12 +27,14 @@ public class KitManager {
         assert(!playerKits.containsKey(player));
         assert(player.isOnline());
         playerKits.put(player, kit);
+        kit.addToPlayers(player);
         addEffectsToPlayer(player, kit);
     }
 
     public void removeFromPlayerKits(Player player, Kit kit) {
         assert(playerKits.containsKey(player));
         playerKits.remove(player);
+        kit.removeToPlayers(player);
         removeEffectsFromPlayer(player, kit);
     }
 

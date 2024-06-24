@@ -19,9 +19,22 @@ public class Kit {
     @Getter
     private Material[] armor;
 
+    @Getter
+    private ArrayList<Player> players = new ArrayList<>();
+
     public Kit(String name, List<PotionEffect> effects, Material[] armor) {
         this.name = name;
         this.effects = effects;
         this.armor = armor;
+    }
+
+    public void addToPlayers(Player player) {
+        assert(!players.contains(player));
+        players.add(player);
+    }
+
+    public void removeToPlayers(Player player) {
+        assert(players.contains(player));
+        players.add(player);
     }
 }

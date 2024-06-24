@@ -3,11 +3,13 @@ package me.kazuto.hcf.Kits.Types;
 import me.kazuto.hcf.Config;
 import me.kazuto.hcf.Kits.Kit;
 import me.kazuto.hcf.Kits.KitManager;
+import me.kazuto.hcf.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -38,19 +40,33 @@ public class Bard extends Kit implements Listener {
         itemEffects.put(Material.BLAZE_POWDER, new PotionEffect(PotionEffectType.STRENGTH, Config.BARD_EFFECT_DURATION, 0));
         itemEffects.put(Material.FEATHER, new PotionEffect(PotionEffectType.JUMP_BOOST, Config.BARD_EFFECT_DURATION, 1));
         itemEffects.put(Material.MAGMA_CREAM, new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Config.BARD_EFFECT_DURATION, 0));
+
+        checkItemInHand();
     }
 
     @EventHandler
-    public void holdItemEvent(PlayerItemHeldEvent event) {
-        Player player = event.getPlayer();
-        if(!(KitManager.getInstance().getKitFromPlayer(player) instanceof Bard))
+    public void rightClickItemEvent(PlayerInteractEvent event) {
+        if(!event.getAction().isRightClick())
             return;
+        if(!itemEffects.containsKey(event.getItem().getType()))
+            return;
+        Bukkit.broadcastMessage("STRENGH 2 BABY");
+    }
 
-        Material item = player.getInventory().getItem(event.getNewSlot()).getType();
-        if(itemEffects.containsKey(item)) {
-            Bukkit.broadcastMessage(itemEffects.get(item).toString());
-            player.addPotionEffect(itemEffects.get(item));
+    public void checkItemInHand() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
+            for(Player player : getPlayers()) {
+                if(itemEffects.containsKey(player.getInventory().getItemInMainHand().getType())) {
+                    player.addPotionEffect(itemEffects.get(player.getInventory().getItemInMainHand().getType()));
+                }
+            }
+        }, 0, Config.BARD_EFFECT_CHECK_HAND);
+    }
 
-        }
+    private static Bard instance = null;
+    public static Bard getInstance() {
+        if(instance == null)
+            instance = new Bard();
+        return instance;
     }
 }

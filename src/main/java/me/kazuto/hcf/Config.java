@@ -9,6 +9,7 @@ public class Config {
     public static ChatColor SUCCESS_COLOR = ChatColor.GREEN;
     public static ChatColor WARNING_COLOR = ChatColor.YELLOW;
 
-    public static int BARD_EFFECT_DURATION = 5 * 20; //seconds(*20 cuz of ticks)
+    public static int BARD_EFFECT_DURATION = 100; //ticks
+    public static int BARD_EFFECT_CHECK_HAND = 10; //ticks
 
 }
