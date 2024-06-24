@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class KitManager {
+    @Getter
     private HashMap<Player, Kit> playerKits = new HashMap<>();
 
     @Getter
@@ -27,14 +28,12 @@ public class KitManager {
         assert(!playerKits.containsKey(player));
         assert(player.isOnline());
         playerKits.put(player, kit);
-        kit.addToPlayers(player);
         addEffectsToPlayer(player, kit);
     }
 
     public void removeFromPlayerKits(Player player, Kit kit) {
         assert(playerKits.containsKey(player));
         playerKits.remove(player);
-        kit.removeToPlayers(player);
         removeEffectsFromPlayer(player, kit);
     }
 

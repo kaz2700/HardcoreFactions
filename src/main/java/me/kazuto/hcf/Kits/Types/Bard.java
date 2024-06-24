@@ -10,14 +10,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Bard extends Kit implements Listener {
     private static PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, -1, 1);
@@ -34,12 +32,12 @@ public class Bard extends Kit implements Listener {
     public Bard() {
         super("Bard", Arrays.asList(speed, regen, res), new Material[]{boots, legs, chest, helm}); //add it in this order or bug, order matters stoopid
 
-        itemEffects.put(Material.IRON_INGOT, new PotionEffect(PotionEffectType.RESISTANCE, Config.BARD_EFFECT_DURATION, 0));
-        itemEffects.put(Material.SUGAR, new PotionEffect(PotionEffectType.SPEED, Config.BARD_EFFECT_DURATION, 1));
-        itemEffects.put(Material.GHAST_TEAR, new PotionEffect(PotionEffectType.REGENERATION, Config.BARD_EFFECT_DURATION, 0));
-        itemEffects.put(Material.BLAZE_POWDER, new PotionEffect(PotionEffectType.STRENGTH, Config.BARD_EFFECT_DURATION, 0));
-        itemEffects.put(Material.FEATHER, new PotionEffect(PotionEffectType.JUMP_BOOST, Config.BARD_EFFECT_DURATION, 1));
-        itemEffects.put(Material.MAGMA_CREAM, new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Config.BARD_EFFECT_DURATION, 0));
+        itemEffects.put(Material.IRON_INGOT, new PotionEffect(PotionEffectType.RESISTANCE, Config.BARD_EFFECT_DURATION_TICKS, 0));
+        itemEffects.put(Material.SUGAR, new PotionEffect(PotionEffectType.SPEED, Config.BARD_EFFECT_DURATION_TICKS, 1));
+        itemEffects.put(Material.GHAST_TEAR, new PotionEffect(PotionEffectType.REGENERATION, Config.BARD_EFFECT_DURATION_TICKS, 0));
+        itemEffects.put(Material.BLAZE_POWDER, new PotionEffect(PotionEffectType.STRENGTH, Config.BARD_EFFECT_DURATION_TICKS, 0));
+        itemEffects.put(Material.FEATHER, new PotionEffect(PotionEffectType.JUMP_BOOST, Config.BARD_EFFECT_DURATION_TICKS, 1));
+        itemEffects.put(Material.MAGMA_CREAM, new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Config.BARD_EFFECT_DURATION_TICKS, 0));
 
         checkItemInHand();
     }
@@ -55,12 +53,18 @@ public class Bard extends Kit implements Listener {
 
     public void checkItemInHand() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
-            for(Player player : getPlayers()) {
-                if(itemEffects.containsKey(player.getInventory().getItemInMainHand().getType())) {
-                    player.addPotionEffect(itemEffects.get(player.getInventory().getItemInMainHand().getType()));
+            HashMap<Player, Kit> playerKits = KitManager.getInstance().getPlayerKits();
+            for(Player player : playerKits.keySet())
+                if(playerKits.get(player) instanceof Bard) {
+                    Material itemRightHand = player.getInventory().getItemInMainHand().getType();
+                    if(itemEffects.containsKey(itemRightHand))
+                        player.addPotionEffect(itemEffects.get(itemRightHand));
+
+                    Material itemLeftHand = player.getInventory().getItemInOffHand().getType();
+                    if(itemEffects.containsKey(itemLeftHand))
+                        player.addPotionEffect(itemEffects.get(itemLeftHand));
                 }
-            }
-        }, 0, Config.BARD_EFFECT_CHECK_HAND);
+        }, 0, Config.BARD_EFFECT_CHECK_HAND_TICKS);
     }
 
     private static Bard instance = null;
