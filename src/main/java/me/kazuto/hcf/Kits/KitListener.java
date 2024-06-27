@@ -8,13 +8,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class KitListener implements Listener {
 
     @EventHandler
     public void onArmorChange(PlayerArmorChangeEvent event) {
         Player player = event.getPlayer();
-        Bukkit.broadcastMessage("asf");
+        Bukkit.broadcastMessage("onArmorChange");
         Kit currentKit = KitManager.getInstance().getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
 
         if(currentKit == null) {
@@ -26,8 +27,9 @@ public class KitListener implements Listener {
             return;
         }
 
-        if(KitManager.getInstance().getKitFromPlayer(player) == currentKit)
+        if(KitManager.getInstance().getKitFromPlayer(player) == currentKit) {
             return;
+        }
 
         KitManager.getInstance().addToPlayerKits(player, currentKit);
         player.sendMessage(String.format("%sSwitched to %s kit.", Config.SUCCESS_COLOR, currentKit.getName()));

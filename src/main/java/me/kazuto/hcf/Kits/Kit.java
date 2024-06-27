@@ -3,7 +3,6 @@ package me.kazuto.hcf.Kits;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.ArrayList;
@@ -23,5 +22,12 @@ public class Kit {
         this.name = name;
         this.effects = effects;
         this.armor = armor;
+    }
+
+    public boolean isActive(Player player) {
+        Kit kit = KitManager.getInstance().getKitFromPlayer(player);
+        if(kit == null)
+            return false;
+        return (kit.getClass().equals(this.getClass()));
     }
 }

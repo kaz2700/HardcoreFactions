@@ -2,14 +2,11 @@ package me.kazuto.hcf.Kits;
 
 import lombok.Getter;
 import me.kazuto.hcf.Kits.Types.Bard;
+import me.kazuto.hcf.Kits.Types.Kamikaze;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class KitManager {
     private HashMap<Player, Kit> playerKits = new HashMap<>();
 
     @Getter
-    private List<Kit> kits = List.of(Bard.getInstance());
+    private List<Kit> kits = List.of(Bard.getInstance(), Kamikaze.getInstance());
 
     public Kit getKitFromPlayer(Player player) {
         return playerKits.get(player);
@@ -49,18 +46,25 @@ public class KitManager {
 
     public Kit getKitFromArmor(ItemStack[] armor) {
         for (Kit kit : getKits()) {
+            boolean matches = true;
             for (int i = 0; i < armor.length; i++) {
-                if (armor[i] == null || armor[i].getType() != kit.getArmor()[i])
-                    break;
-                if(i == 3)
-                    return kit;
+                if(armor[i] == null) {
+                    if (kit.getArmor()[i] != null) {
+                        matches = false;
+                        break;
+                    }
+                } else {
+                    if (armor[i].getType() != kit.getArmor()[i]) {
+                        matches = false;
+                        break;
+                    }
+                }
             }
+            if(matches)
+                return kit;
         }
         return null;
     }
-
-
-
 
     private static KitManager instance = null;
     public static KitManager getInstance() {

@@ -8,6 +8,7 @@ import me.kazuto.hcf.Factions.Commands.FactionExecutor;
 import me.kazuto.hcf.Kits.KitListener;
 import me.kazuto.hcf.Kits.KitManager;
 import me.kazuto.hcf.Kits.Types.Bard;
+import me.kazuto.hcf.Kits.Types.Kamikaze;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
@@ -35,6 +36,7 @@ public class Main extends JavaPlugin implements Listener {
 
         Bukkit.getPluginManager().registerEvents(new KitListener(), this);
         Bukkit.getPluginManager().registerEvents(new Bard(), this);
+        Bukkit.getPluginManager().registerEvents(new Kamikaze(), this);
     }
     public void registerCommands() {
         this.getCommand("f").setExecutor(new FactionExecutor());
