@@ -38,6 +38,7 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new Bard(), this);
         Bukkit.getPluginManager().registerEvents(new Kamikaze(), this);
     }
+
     public void registerCommands() {
         this.getCommand("f").setExecutor(new FactionExecutor());
         this.getCommand("test").setExecutor(new Test());
