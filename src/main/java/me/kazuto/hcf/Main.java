@@ -9,6 +9,7 @@ import me.kazuto.hcf.Kits.KitListener;
 import me.kazuto.hcf.Kits.KitManager;
 import me.kazuto.hcf.Kits.Types.Bard;
 import me.kazuto.hcf.Kits.Types.Kamikaze;
+import me.kazuto.hcf.Scoreboard.ScoreboardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
@@ -20,10 +21,13 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Hardcore Factions Plugin Enabled.");
+
+        ScoreboardManager.getInstance();
 
         registerEvents();
         registerCommands();
+
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Hardcore Factions Plugin Enabled.");
     }
 
     public void onDisable() {
@@ -34,9 +38,11 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new ChatEvent(), this);
 
+        Bukkit.getPluginManager().registerEvents(ScoreboardManager.getInstance(), this);
+
         Bukkit.getPluginManager().registerEvents(new KitListener(), this);
-        Bukkit.getPluginManager().registerEvents(new Bard(), this);
-        Bukkit.getPluginManager().registerEvents(new Kamikaze(), this);
+        Bukkit.getPluginManager().registerEvents(Bard.getInstance(), this);
+        Bukkit.getPluginManager().registerEvents(Kamikaze.getInstance(), this);
     }
 
     public void registerCommands() {

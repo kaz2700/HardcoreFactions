@@ -2,7 +2,6 @@ package me.kazuto.hcf.Kits;
 
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import me.kazuto.hcf.Config;
-import me.kazuto.hcf.Scoreboard.Implementation.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +15,6 @@ public class KitListener implements Listener {
     @EventHandler
     public void onArmorChange(PlayerArmorChangeEvent event) {
         Player player = event.getPlayer();
-        Bukkit.broadcastMessage("onArmorChange");
         Kit currentKit = KitManager.getInstance().getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
 
         if(currentKit == null) {
@@ -39,9 +37,6 @@ public class KitListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
-        FastBoard fastBoard = new FastBoard(player);
-        fastBoard.updateLines("beaner");
 
         Kit currentKit = KitManager.getInstance().getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
         if (currentKit != null) {

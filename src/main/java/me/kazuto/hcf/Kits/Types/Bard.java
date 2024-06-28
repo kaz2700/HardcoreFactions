@@ -5,6 +5,7 @@ import me.kazuto.hcf.Kits.Kit;
 import me.kazuto.hcf.Kits.KitEffect;
 import me.kazuto.hcf.Kits.KitManager;
 import me.kazuto.hcf.Main;
+import me.kazuto.hcf.Scoreboard.Implementation.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public class Bard extends Kit implements Listener {
 
     private ArrayList<KitEffect> kitEffects = new ArrayList<>();
 
-    public Bard() {
+    private Bard() {
         super("Bard", Arrays.asList(speed, regen, res), new Material[]{boots, legs, chest, helm}); //add it in this order or bug, order matters stoopid
 
         kitEffects.add(new KitEffect(Material.IRON_INGOT, new PotionEffect(PotionEffectType.RESISTANCE, Config.BARD_EFFECT_DURATION_TICKS, 0), new PotionEffect(PotionEffectType.RESISTANCE, Config.BARD_EFFECT_DURATION_TICKS, 2)));
