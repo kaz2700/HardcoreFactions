@@ -27,7 +27,7 @@ public class FCreateArgument extends CommandArgument {
             return false;
 
         Player player = (Player) commandSender;
-        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getFactionPlayerFromUUID(player.getUniqueId());
+        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
         if(strings.length != 2 || strings[1].isEmpty()) {
             //todo decide what to do with this error message cuz it also hows jup bewcause of the argument executor

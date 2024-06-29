@@ -3,7 +3,6 @@ package me.kazuto.hcf.Factions;
 import lombok.Getter;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +21,21 @@ public class FactionManager {
 
     public PlayerFaction getFactionFromPlayer(FactionPlayer factionPlayer) {
         for (PlayerFaction playerFaction : getPlayerFactions())
-            for(FactionPlayer factionPlayer1 : playerFaction.getFactionPlayers())
+            for(FactionPlayer factionPlayer1 : playerFaction.getPlayers())
                 if(factionPlayer == factionPlayer1)
                     return playerFaction;
+        return null;
+    }
+
+    public void deleteFaction(Faction faction) {
+        assert(factions.contains(faction));
+        factions.remove(faction);
+    }
+
+    public PlayerFaction getFactionFromName(String name) {
+        for(PlayerFaction playerFaction : getPlayerFactions())
+            if(playerFaction.getName().equalsIgnoreCase(name))
+                return playerFaction;
         return null;
     }
 

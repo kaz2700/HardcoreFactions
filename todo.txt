@@ -1,7 +1,21 @@
 shiemin
 
-commands
+captains n coleaders?
 kits
 in n out of claim
 make chat pretty
 events (koths, sotw, eotw, )
+ban some faction names
+mundial of factions
+faction invites remove after 24h
+command f openinvite <player>
+cooldown on invite and uninvite a player
+f invites
+cooldown on commands
+kamikze kit
+tnt tag kit
+info player
+bard effect so niggas levitate except kits maybe??? idk think
+armadillo kit pushes niggas when hit
+bard can hold effects in both hands
+good time for kit effects

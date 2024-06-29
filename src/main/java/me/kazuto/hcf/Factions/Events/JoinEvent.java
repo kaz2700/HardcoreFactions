@@ -13,7 +13,7 @@ public class JoinEvent implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         event.setJoinMessage("");
         UUID uuid = event.getPlayer().getUniqueId();
-        if(FactionPlayerManager.getInstance().getFactionPlayerFromUUID(uuid) == null)
+        if(FactionPlayerManager.getInstance().getPlayerFromUUID(uuid) == null)
             FactionPlayerManager.getInstance().createFactionPlayer(uuid);
     }
 }

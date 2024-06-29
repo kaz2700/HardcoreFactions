@@ -14,7 +14,7 @@ public class ChatEvent implements Listener {
         event.setCancelled(true);
         Player player = event.getPlayer();
         String playerName = player.getName();
-        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getFactionPlayerFromUUID(player.getUniqueId());
+        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
         if(!factionPlayer.hasAFaction()) {
             Bukkit.broadcastMessage(String.format("%s: %s", playerName, event.getMessage()));
