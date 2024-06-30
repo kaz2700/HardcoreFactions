@@ -38,7 +38,7 @@ public class PlayerFaction extends Faction {
     boolean isFOpen;
 
     public PlayerFaction(String name, FactionPlayer leader) {
-        super(name);
+        super(name, 1);
         this.leader = leader;
         addPlayer(leader);
     }

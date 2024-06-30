@@ -2,6 +2,7 @@ package me.kazuto.hcf;
 
 import lombok.Getter;
 import me.kazuto.hcf.Commands.Test;
+import me.kazuto.hcf.Factions.Claim.ClaimListener;
 import me.kazuto.hcf.Factions.Events.ChatEvent;
 import me.kazuto.hcf.Factions.Events.JoinEvent;
 import me.kazuto.hcf.Factions.Commands.FactionExecutor;
@@ -40,6 +41,7 @@ public class Main extends JavaPlugin implements Listener {
 
         Bukkit.getPluginManager().registerEvents(ScoreboardManager.getInstance(), this);
 
+        Bukkit.getPluginManager().registerEvents(new ClaimListener(), this);
         Bukkit.getPluginManager().registerEvents(new KitListener(), this);
         Bukkit.getPluginManager().registerEvents(Bard.getInstance(), this);
         Bukkit.getPluginManager().registerEvents(Kamikaze.getInstance(), this);

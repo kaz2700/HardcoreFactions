@@ -22,6 +22,10 @@ public class Config {
     public static int BARD_EFFECT_DURATION_TICKS = 100;
     public static int BARD_EFFECT_CHECK_HAND_TICKS = 10;
 
+    //distances
+    public static int SPAWN_RADIUS = 5;
+    public static int MAP_RADIUS = 50;
+
 
     //colored strings
     public static String SERVER_DISPLAY_NAME = String.format("%s%s%s", Config.PRIMARY_COLOR, Config.BOLD, Config.SERVER_NAME);

@@ -51,6 +51,7 @@ public class FInviteArgument extends CommandArgument {
 
         if(invitedFactionPlayer.isOnline())
             invitedFactionPlayer.getOfflinePlayer().getPlayer().sendMessage(String.format("%s%s has invited you to join %s.", Config.SUCCESS_COLOR, factionPlayer.getName(), faction.getName()));
+        player.sendMessage(String.format("%s You invited %s to the faction", Config.SUCCESS_COLOR, invitedFactionPlayer.getName()));
         faction.invitePlayer(invitedFactionPlayer);
         return true;
     }

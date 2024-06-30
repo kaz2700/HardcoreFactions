@@ -15,6 +15,7 @@ public class FCloseArgument extends CommandArgument {
         super("close", "Close your faction to the public.", "/f close");
     }
 
+    @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(!(commandSender instanceof Player player)) {
             commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
