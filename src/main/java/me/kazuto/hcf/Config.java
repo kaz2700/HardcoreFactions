@@ -18,9 +18,10 @@ public class Config {
     public static ChatColor WARNING_COLOR = ChatColor.YELLOW;
     public static ChatColor BACKGROUND_COLOR = ChatColor.GRAY;
 
-    //durations
+    //kits
     public static int BARD_EFFECT_DURATION_TICKS = 100;
     public static int BARD_EFFECT_CHECK_HAND_TICKS = 10;
+    public static int BARD_EFFECT_RADIUS = 5;
 
     //distances
     public static int SPAWN_RADIUS = 5;

@@ -1,4 +1,4 @@
-package me.kazuto.hcf.Factions.Events;
+package me.kazuto.hcf.Events;
 
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import org.bukkit.event.EventHandler;

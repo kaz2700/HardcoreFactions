@@ -21,9 +21,10 @@ public class FactionManager {
         factions.add(new Wilderness());
     }
 
-    public void createPlayerFaction(String name, FactionPlayer leader) {
+    public Faction createPlayerFaction(String name, FactionPlayer leader) {
         PlayerFaction playerFaction = new PlayerFaction(name, leader);
         factions.add(playerFaction);
+        return playerFaction;
     }
 
     public List<PlayerFaction> getPlayerFactions() {

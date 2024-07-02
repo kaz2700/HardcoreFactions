@@ -1,13 +1,16 @@
 package me.kazuto.hcf;
 
 import lombok.Getter;
+import me.kazuto.hcf.Commands.Money.Balance;
+import me.kazuto.hcf.Commands.Money.Pay;
 import me.kazuto.hcf.Commands.Test;
 import me.kazuto.hcf.Factions.Claim.ClaimListener;
-import me.kazuto.hcf.Factions.Events.ChatEvent;
-import me.kazuto.hcf.Factions.Events.JoinEvent;
+import me.kazuto.hcf.Events.ChatEvent;
+import me.kazuto.hcf.Events.JoinEvent;
 import me.kazuto.hcf.Factions.Commands.FactionExecutor;
+import me.kazuto.hcf.Events.PlayerHitEnemyEvent;
+import me.kazuto.hcf.Factions.FactionEvents.FactionCreateListener;
 import me.kazuto.hcf.Kits.KitListener;
-import me.kazuto.hcf.Kits.KitManager;
 import me.kazuto.hcf.Kits.Types.Bard;
 import me.kazuto.hcf.Kits.Types.Kamikaze;
 import me.kazuto.hcf.Scoreboard.ScoreboardManager;
@@ -36,6 +39,9 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public void registerEvents() {
+        Bukkit.getPluginManager().registerEvents(new PlayerHitEnemyEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new FactionCreateListener(), this);
+
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new ChatEvent(), this);
 
@@ -50,5 +56,7 @@ public class Main extends JavaPlugin implements Listener {
     public void registerCommands() {
         this.getCommand("f").setExecutor(new FactionExecutor());
         this.getCommand("test").setExecutor(new Test());
+        this.getCommand("balance").setExecutor(new Balance());
+        this.getCommand("pay").setExecutor(new Pay());
     }
 }

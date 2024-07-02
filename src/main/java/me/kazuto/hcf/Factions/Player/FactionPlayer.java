@@ -4,10 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
+import me.kazuto.hcf.Timers.Timer;
+import me.kazuto.hcf.Timers.TimerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
-
 import java.util.UUID;
 
 public class FactionPlayer {
@@ -39,11 +40,15 @@ public class FactionPlayer {
     @Setter
     Location preClaimPos2;
 
+    @Getter
+    Timer pvpTimer;
+
     public FactionPlayer(UUID uuid) {
         this.uuid = uuid;
         this.setBalance(100);
         preClaimPos1 = null;
         preClaimPos2 = null;
+        this.pvpTimer = new Timer(30.0);
     }
 
     public OfflinePlayer getOfflinePlayer() {

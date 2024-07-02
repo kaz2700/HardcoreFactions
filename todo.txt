@@ -1,15 +1,6 @@
-shiemin
-
 captains n coleaders?
-kits
-in n out of claim
 make chat pretty
 events (koths, sotw, eotw, )
-ban some faction names
-mundial of factions
-faction invites remove after 24h
-command f openinvite <player>
-cooldown on invite and uninvite a player
 f invites
 cooldown on commands
 kamikze kit
@@ -21,3 +12,14 @@ bard can hold effects in both hands
 good time for kit effects
 if drop claiming wand it disapear
 cant claim in nether andend
+fix shit & config
+prepare map w roads n shi
+world borders
+saving factions n shi
+allies
+
+optional java???
+
+
+
+mundial of factions

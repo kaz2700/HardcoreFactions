@@ -13,6 +13,10 @@ import java.util.List;
 public class PlayerFaction extends Faction {
     @Getter
     ArrayList<FactionPlayer> players = new ArrayList<>();
+    @Getter
+    ArrayList<FactionPlayer> coleaders = new ArrayList<>();
+    @Getter
+    ArrayList<FactionPlayer> captains = new ArrayList<>();
 
     @Getter
     ArrayList<FactionPlayer> invitedPlayers = new ArrayList<>();
@@ -42,6 +46,17 @@ public class PlayerFaction extends Faction {
         this.leader = leader;
         addPlayer(leader);
     }
+
+    public void addCaptain(FactionPlayer factionPlayer) {
+        assert(!captains.contains(factionPlayer));
+        captains.add(factionPlayer);
+    }
+
+    public void removeCaptain(FactionPlayer factionPlayer) {
+        assert(!captains.contains(factionPlayer));
+        captains.remove(factionPlayer);
+    }
+
     public void invitePlayer(FactionPlayer factionPlayer) {
         assert(!invitedPlayers.contains(factionPlayer));
         invitedPlayers.add(factionPlayer);

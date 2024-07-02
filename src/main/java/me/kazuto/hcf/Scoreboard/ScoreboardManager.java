@@ -8,6 +8,8 @@ import me.kazuto.hcf.Kits.Kit;
 import me.kazuto.hcf.Kits.KitManager;
 import me.kazuto.hcf.Main;
 import me.kazuto.hcf.Scoreboard.Implementation.FastBoard;
+import me.kazuto.hcf.Timers.Timer;
+import me.kazuto.hcf.Timers.TimerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -41,6 +43,10 @@ public class ScoreboardManager implements Listener {
             FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());//maybe bug cuz factionplayer dont exist?
             if(factionPlayer.hasAFaction())
                 scoreboardString.add(String.format("%sFaction: %s%s", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, FactionManager.getInstance().getFactionFromPlayer(factionPlayer).getName()));
+
+            Timer timer = factionPlayer.getPvpTimer();
+            if (TimerManager.getInstance().isActive(timer))
+                scoreboardString.add(String.format("%sCombat Timer: %s%.1fs", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, TimerManager.getInstance().getTimers().get(timer)));
 
             if(scoreboardString.isEmpty()) {
                 fastBoard.updateTitle("");

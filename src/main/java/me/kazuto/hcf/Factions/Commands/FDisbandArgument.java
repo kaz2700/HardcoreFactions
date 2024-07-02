@@ -18,12 +18,16 @@ public class FDisbandArgument extends CommandArgument {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings){
-        if(!(commandSender instanceof Player)) {
+        if(!(commandSender instanceof Player player)) {
             commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction to disband.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
             return false;
         }
 
-        Player player = (Player) commandSender;
+        if(strings.length != 1) {
+            player.sendMessage(String.format("%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
+            return false;
+        }
+
         FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
         if(!factionPlayer.hasAFaction()) {

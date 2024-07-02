@@ -23,6 +23,11 @@ public class FInviteArgument extends CommandArgument {
             return false;
         }
 
+        if(strings.length != 2) {
+            player.sendMessage(String.format("%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
+            return false;
+        }
+
         FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
         if(FactionPlayerManager.getInstance().getPlayerFromName(strings[1]) == null) {

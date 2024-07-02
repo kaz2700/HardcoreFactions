@@ -27,6 +27,7 @@ public class ClaimListener implements Listener {
         if(factionTo == null) {
             player.sendMessage(String.format("%sYou can't get out of the map.", Config.ERROR_COLOR));
             event.setCancelled(true);
+            return;
         }
 
         if(factionFrom != factionTo) {

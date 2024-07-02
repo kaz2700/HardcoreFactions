@@ -1,11 +1,13 @@
 package me.kazuto.hcf.Factions.Commands;
 
 import me.kazuto.hcf.Config;
+import me.kazuto.hcf.Factions.FactionEvents.Events.FactionCreateEvent;
 import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Factions.Utils.CommandArgument;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -18,21 +20,17 @@ public class FCreateArgument extends CommandArgument {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(!(commandSender instanceof Player)) {
+        if(!(commandSender instanceof Player player)) {
             commandSender.sendMessage(String.format("%s%sYou need to be a player to execute this command.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
             return false;
         }
 
-        if(strings[0].isEmpty())
-            return false;
-
-        Player player = (Player) commandSender;
-        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
-
-        if(strings.length != 2 || strings[1].isEmpty()) {
-            //todo decide what to do with this error message cuz it also hows jup bewcause of the argument executor
+        if(strings.length != 2) {
+            player.sendMessage(String.format("%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
             return false;
         }
+
+        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
         String createdFactionName = strings[1];
 
@@ -53,7 +51,8 @@ public class FCreateArgument extends CommandArgument {
             }
         }
 
-        FactionManager.getInstance().createPlayerFaction(strings[1], factionPlayer);
+        PlayerFaction faction = (PlayerFaction) FactionManager.getInstance().createPlayerFaction(strings[1], factionPlayer);
+        Bukkit.getServer().getPluginManager().callEvent(new FactionCreateEvent(factionPlayer, faction));
         player.sendMessage(String.format("%sFaction %s created.", Config.SUCCESS_COLOR, strings[1]));
         return true;
     }

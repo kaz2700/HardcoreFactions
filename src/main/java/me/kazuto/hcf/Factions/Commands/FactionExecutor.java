@@ -14,6 +14,7 @@ public class FactionExecutor extends ArgumentExecutor {
         addArgument(new FOpenArgument());
         addArgument(new FCloseArgument());
         addArgument(new FClaimArgument());
+        addArgument(new FLeaveArgument());
     }
 }
 //todo if command is only f then show hel.p

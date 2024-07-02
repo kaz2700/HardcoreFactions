@@ -15,16 +15,13 @@ public class ArgumentExecutor implements CommandExecutor {
     }
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(strings.length == 0) {
+        if (strings.length == 0) {
             commandSender.sendMessage(String.format("%s%sNo sub-command provided.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
             return false;
         }
-        for(CommandArgument argument : arguments) {
-            if(argument.getLabel().equalsIgnoreCase(strings[0]) || argument.getAliases().stream().anyMatch(strings[0]::equalsIgnoreCase)) {
-                boolean commandSuccess = argument.onCommand(commandSender, command, s, strings);
-                if(!commandSuccess)
-                    commandSender.sendMessage(String.format("%s%s%s%s%s", Config.ERROR_COLOR, Config.ERROR_PREFIX, argument.getUsage(), "\n", argument.getDescription()));//TODO maybe remove???
-                return commandSuccess;
+        for (CommandArgument argument : arguments) {
+            if (argument.getLabel().equalsIgnoreCase(strings[0]) || argument.getAliases().stream().anyMatch(strings[0]::equalsIgnoreCase)) {
+                return argument.onCommand(commandSender, command, s, strings);
             }
         }
         commandSender.sendMessage("TODO call HelpArgument");

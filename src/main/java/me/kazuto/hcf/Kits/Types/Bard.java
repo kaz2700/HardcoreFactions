@@ -1,6 +1,8 @@
 package me.kazuto.hcf.Kits.Types;
 
 import me.kazuto.hcf.Config;
+import me.kazuto.hcf.Factions.FactionManager;
+import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import me.kazuto.hcf.Kits.Kit;
 import me.kazuto.hcf.Kits.KitEffect;
 import me.kazuto.hcf.Kits.KitManager;
@@ -46,27 +48,26 @@ public class Bard extends Kit implements Listener {
 
     @EventHandler
     public void rightClickItemEvent(PlayerInteractEvent event) {
-        if(!this.isActive(event.getPlayer()))
+        if (!this.isActive(event.getPlayer()))
             return;
-        if(!event.getAction().isRightClick())
+        if (!event.getAction().isRightClick())
             return;
-        for(KitEffect kitEffect : kitEffects)
-            if(event.getItem() != null && kitEffect.getItem() == event.getItem().getType())
+        for (KitEffect kitEffect : kitEffects) {
+            if (event.getItem() != null && kitEffect.getItem() == event.getItem().getType())
                 Bukkit.broadcastMessage("STRENGH 2 BABY" + event.getItem().getType().toString());
+        }
     }
 
     public void checkItemInHand() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
             HashMap<Player, Kit> playerKits = KitManager.getInstance().getPlayerKits();
-            for(Player player : playerKits.keySet()) {
-                if (this.isActive(player)) {//todo isActive
+            for (Player player : playerKits.keySet()) {
+                if (this.isActive(player)) {
                     Material itemRightHand = player.getInventory().getItemInMainHand().getType();
                     Material itemLeftHand = player.getInventory().getItemInOffHand().getType();
                     for (KitEffect kitEffect : kitEffects) {
-                        if (kitEffect.getItem() == itemRightHand)
-                            player.addPotionEffect(kitEffect.getHoldEffect());
-                        if (kitEffect.getItem() == itemLeftHand)
-                            player.addPotionEffect(kitEffect.getHoldEffect());
+                        if (kitEffect.getItem() == itemRightHand || kitEffect.getItem() == itemLeftHand)
+                            FactionPlayerManager.getInstance().getNearByPlayers(player, Config.BARD_EFFECT_RADIUS, false).forEach(player1 -> player1.addPotionEffect(kitEffect.getHoldEffect()));
                     }
                 }
             }

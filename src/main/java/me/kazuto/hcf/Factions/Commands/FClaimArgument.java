@@ -28,6 +28,11 @@ public class FClaimArgument extends CommandArgument {
             return false;
         }
 
+        if(strings.length != 1) {
+            player.sendMessage(String.format("%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
+            return false;
+        }
+
         FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
         PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
 

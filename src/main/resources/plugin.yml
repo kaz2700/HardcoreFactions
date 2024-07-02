@@ -5,7 +5,11 @@ description: Hardcore factions
 author: KazutoXD
 api-version: '1.20.6'
 commands:
+  test:
   faction:
     aliases: [ f, t, team, squad, F ]
     description: Faction commands.
-  test:
+  balance:
+    aliases: [ bal, money, cash, bands, ps ]
+  pay:
+    usage: "/pay <player> <ammount>"
