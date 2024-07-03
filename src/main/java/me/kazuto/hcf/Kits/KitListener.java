@@ -2,13 +2,17 @@ package me.kazuto.hcf.Kits;
 
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import me.kazuto.hcf.Config;
+import me.kazuto.hcf.Factions.Player.FactionPlayer;
+import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
+import me.kazuto.hcf.Kits.KitEvents.Events.KitActivateEvent;
+import me.kazuto.hcf.Timers.Timer;
+import me.kazuto.hcf.Timers.TimerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class KitListener implements Listener {
 
@@ -29,9 +33,14 @@ public class KitListener implements Listener {
         if(KitManager.getInstance().getKitFromPlayer(player) == currentKit) {
             return;
         }
+        Bukkit.broadcastMessage("1sec");
+        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
+        Timer classWarmUp = new Timer(Config.KIT_WARMUP_SECONDS, () -> {
+            Bukkit.getServer().getPluginManager().callEvent(new KitActivateEvent(player, currentKit));
+        });
+        factionPlayer.setClassWarmUp(classWarmUp);
+        TimerManager.getInstance().addTimer(classWarmUp);
 
-        KitManager.getInstance().addToPlayerKits(player, currentKit);
-        player.sendMessage(String.format("%sSwitched to %s kit.", Config.SUCCESS_COLOR, currentKit.getName()));
     }
 
     @EventHandler

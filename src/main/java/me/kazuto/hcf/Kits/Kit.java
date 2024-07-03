@@ -1,6 +1,7 @@
 package me.kazuto.hcf.Kits;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -11,6 +12,10 @@ import java.util.List;
 public class Kit {
     @Getter
     private String name;
+
+    @Getter
+    @Setter
+    private double warmup;
 
     @Getter
     private List<PotionEffect> effects;

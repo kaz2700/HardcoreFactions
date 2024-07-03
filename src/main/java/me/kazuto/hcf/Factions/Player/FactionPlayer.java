@@ -43,6 +43,13 @@ public class FactionPlayer {
     @Getter
     Timer pvpTimer;
 
+    @Getter
+    @Setter
+    Timer classWarmUp;
+
+    @Getter
+    Timer pearlCoolDown;
+
     public FactionPlayer(UUID uuid) {
         this.uuid = uuid;
         this.setBalance(100);

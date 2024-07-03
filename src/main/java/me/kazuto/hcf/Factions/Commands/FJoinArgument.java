@@ -1,11 +1,14 @@
 package me.kazuto.hcf.Factions.Commands;
 
 import me.kazuto.hcf.Config;
+import me.kazuto.hcf.Factions.FactionEvents.Events.FactionJoinEvent;
+import me.kazuto.hcf.Factions.FactionEvents.FactionJoinListener;
 import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Factions.Utils.CommandArgument;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -46,13 +49,13 @@ public class FJoinArgument extends CommandArgument {
             return false;
         }
 
-        if(!faction.getInvitedPlayers().contains(joiningPlayer)) {
+        if(!faction.getInvitedPlayers().contains(joiningPlayer) && !faction.isOpen()) {
             player.sendMessage(String.format("%s%sYou are not invited to the faction.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
             return false;
         }
 
         faction.addPlayer(joiningPlayer);
-        faction.broadcastMessage(String.format("%s%s joined the faction.", Config.SUCCESS_COLOR, joiningPlayer.getName()));
+        Bukkit.getServer().getPluginManager().callEvent(new FactionJoinEvent(player, faction));
         return true;
     }
 }

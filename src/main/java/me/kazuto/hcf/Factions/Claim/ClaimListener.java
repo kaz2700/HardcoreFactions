@@ -2,6 +2,7 @@ package me.kazuto.hcf.Factions.Claim;
 
 import me.kazuto.hcf.Config;
 import me.kazuto.hcf.Factions.Faction;
+import me.kazuto.hcf.Factions.FactionEvents.Events.FactionClaimEvent;
 import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
@@ -15,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.EquipmentSlot;
 
 public class ClaimListener implements Listener {
 
@@ -37,36 +39,40 @@ public class ClaimListener implements Listener {
     }
 
     @EventHandler
-    public void onClickEvent(PlayerInteractEvent event) {
+    public void onClickEvent (PlayerInteractEvent event) {
         Player player = event.getPlayer();
         FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
-        if(!player.getInventory().getItemInMainHand().isSimilar(ClaimingWand.getClaimingWand()))
+
+        if (event.getHand() == EquipmentSlot.OFF_HAND)
+            return;
+
+        if (!player.getInventory().getItemInMainHand().isSimilar(ClaimingWand.getClaimingWand()))
             return;
 
         event.setCancelled(true);
 
-        if(!factionPlayer.hasAFaction()) {
+        if (!factionPlayer.hasAFaction()) {
             player.sendMessage(String.format("%s%sYou need a faction to claim!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
             return;
         }
 
         PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
 
-        if(faction.getLeader() != factionPlayer) {
+        if (faction.getLeader() != factionPlayer) {
             player.sendMessage(String.format("%s%sYou need to be the leader of the faction!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
             return;
         }
 
-        if(faction.getClaim() != null) {
+        if (faction.getClaim() != null) {
             player.sendMessage(String.format("%s%sThe faction already has a claim!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
             return;
         }
 
-        if(event.getAction() == Action.LEFT_CLICK_BLOCK) {
+        if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
             Faction clickedBlockLocationFaction = FactionManager.getInstance().getFactionFromLocation(event.getClickedBlock().getLocation());
-            assert(clickedBlockLocationFaction != null);
+            assert (clickedBlockLocationFaction != null);
 
-            if(clickedBlockLocationFaction.getClaimPriority() >= faction.getClaimPriority()) {
+            if (clickedBlockLocationFaction.getClaimPriority() >= faction.getClaimPriority()) {
                 player.sendMessage(String.format("%s%sYou cannot claim inside the territoy of %s!", Config.ERROR_COLOR, Config.ERROR_PREFIX, clickedBlockLocationFaction.getName()));
                 return;
             }
@@ -76,22 +82,21 @@ public class ClaimListener implements Listener {
             return;
         }
 
-        if(event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             player.sendMessage("Location2 set");
             factionPlayer.setPreClaimPos2(event.getClickedBlock().getLocation());
             return;
         }
 
-        if(event.getAction() == Action.RIGHT_CLICK_AIR) {
+        if (event.getAction() == Action.RIGHT_CLICK_AIR) {
             player.sendMessage("Claim cleared");
             factionPlayer.setPreClaimPos1(null);
             factionPlayer.setPreClaimPos2(null);
             return;
         }
 
-        if(event.getAction() == Action.LEFT_CLICK_AIR && player.isSneaking() && factionPlayer.getPreClaimPos1() != null && factionPlayer.getPreClaimPos2() != null) {
-            player.sendMessage("Claimed");
-            faction.setClaim(new Claim(factionPlayer.getPreClaimPos1(), factionPlayer.getPreClaimPos2()));
+        if (event.getAction() == Action.LEFT_CLICK_AIR && player.isSneaking() && factionPlayer.getPreClaimPos1() != null && factionPlayer.getPreClaimPos2() != null) {
+            Bukkit.getServer().getPluginManager().callEvent(new FactionClaimEvent(player, faction));
         }
     }
 }

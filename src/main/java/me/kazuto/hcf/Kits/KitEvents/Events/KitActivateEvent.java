@@ -1,14 +1,14 @@
-package me.kazuto.hcf.Factions.FactionEvents.Events;
+package me.kazuto.hcf.Kits.KitEvents.Events;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.kazuto.hcf.Factions.Types.PlayerFaction;
+import me.kazuto.hcf.Kits.Kit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class FactionClaimEvent extends Event implements Cancellable {
+public class KitActivateEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
 
     @Getter
@@ -19,11 +19,11 @@ public class FactionClaimEvent extends Event implements Cancellable {
     private Player player;
 
     @Getter
-    private PlayerFaction faction;
+    private Kit kit;
 
-    public FactionClaimEvent(Player player, PlayerFaction faction) {
+    public KitActivateEvent(Player player, Kit kit) {
         this.player = player;
-        this.faction = faction;
+        this.kit = kit;
     }
 
     public HandlerList getHandlers() {

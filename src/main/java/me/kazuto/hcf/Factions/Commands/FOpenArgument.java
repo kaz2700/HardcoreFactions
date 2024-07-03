@@ -35,13 +35,13 @@ public class FOpenArgument extends CommandArgument {
             return false;
         }
 
-        if(faction.isFOpen()) {
+        if(faction.isOpen()) {
             player.sendMessage(String.format("%s%sYour faction is already open.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
             return false;
         }
 
         faction.broadcastMessage(String.format("%sYour faction has been opened.", Config.WARNING_COLOR));
-        faction.setFOpen(true);
+        faction.setOpen(true);
 
         return true;
     }

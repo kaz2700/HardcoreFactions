@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import me.kazuto.hcf.Factions.Faction;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public class PlayerFaction extends Faction {
 
     @Getter
     @Setter
-    boolean isFOpen;
+    boolean isOpen;
 
     public PlayerFaction(String name, FactionPlayer leader) {
         super(name, 1);

@@ -1,11 +1,8 @@
 package me.kazuto.hcf.Timers;
 
 import lombok.Getter;
-import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Main;
 import org.bukkit.Bukkit;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TimerManager {
@@ -25,6 +22,8 @@ public class TimerManager {
         timers.forEach ((timer, time) -> {
             timers.put(timer, time - 0.1);
             if (timers.get(timer) <= 0) {
+                if(timer.getEndTask() != null)
+                    Bukkit.getScheduler().runTask(Main.getInstance(), timer.getEndTask());
                 timers.remove(timer);
             }
         });

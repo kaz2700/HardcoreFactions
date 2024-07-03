@@ -44,9 +44,14 @@ public class ScoreboardManager implements Listener {
             if(factionPlayer.hasAFaction())
                 scoreboardString.add(String.format("%sFaction: %s%s", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, FactionManager.getInstance().getFactionFromPlayer(factionPlayer).getName()));
 
-            Timer timer = factionPlayer.getPvpTimer();
-            if (TimerManager.getInstance().isActive(timer))
-                scoreboardString.add(String.format("%sCombat Timer: %s%.1fs", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, TimerManager.getInstance().getTimers().get(timer)));
+            Timer pvpTimer = factionPlayer.getPvpTimer();
+            if (TimerManager.getInstance().isActive(pvpTimer))
+                scoreboardString.add(String.format("%sCombat Timer: %s%.1fs", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, TimerManager.getInstance().getTimers().get(pvpTimer)));
+
+            Timer classWarmUpTimer = factionPlayer.getClassWarmUp();
+            if(TimerManager.getInstance().isActive(classWarmUpTimer))
+                scoreboardString.add(String.format("%sClass Warmup: %s%.1fs", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, TimerManager.getInstance().getTimers().get(classWarmUpTimer)));
+
 
             if(scoreboardString.isEmpty()) {
                 fastBoard.updateTitle("");

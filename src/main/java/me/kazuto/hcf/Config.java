@@ -19,6 +19,7 @@ public class Config {
     public static ChatColor BACKGROUND_COLOR = ChatColor.GRAY;
 
     //kits
+    public static double KIT_WARMUP_SECONDS = 1;
     public static int BARD_EFFECT_DURATION_TICKS = 100;
     public static int BARD_EFFECT_CHECK_HAND_TICKS = 10;
     public static int BARD_EFFECT_RADIUS = 5;

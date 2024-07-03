@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 
 public class FactionCreateListener implements Listener {
     @EventHandler
-    public void createFaction (FactionCreateEvent event) {
+    public void onCreate(FactionCreateEvent event) {
         Bukkit.broadcastMessage(String.format("%s%s %swas created by %s%s", Config.SECONDARY_COLOR, event.getFaction().getName(), Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, event.getPlayer().getName()));
     }
 }
