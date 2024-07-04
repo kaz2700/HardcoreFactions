@@ -33,7 +33,7 @@ public class KitListener implements Listener {
         if(KitManager.getInstance().getKitFromPlayer(player) == currentKit) {
             return;
         }
-        Bukkit.broadcastMessage("1sec");
+        
         FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
         Timer classWarmUp = new Timer(Config.KIT_WARMUP_SECONDS, () -> {
             Bukkit.getServer().getPluginManager().callEvent(new KitActivateEvent(player, currentKit));

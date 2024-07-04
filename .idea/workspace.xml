@@ -5,24 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15fc85cb-44e0-4abd-b88a-a1533666a166" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Claim/ClaimListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Claim/ClaimListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FCloseArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FCloseArgument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FJoinArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FJoinArgument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FOpenArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FOpenArgument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionClaimEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionClaimEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionJoinEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionJoinEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionClaimListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionClaimListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionCreateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionCreateListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Player/FactionPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Player/FactionPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/PlayerFaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/PlayerFaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Kit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Kit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FWhoArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FWhoArgument.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/ScoreboardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/ScoreboardManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Timers/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Timers/Timer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Timers/TimerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Timers/TimerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Types/Kamikaze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Types/Kamikaze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,17 +35,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="HCF" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="HCF" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="HCF" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -88,22 +66,26 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Gradle.Build HardcoreFactions.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.HCF [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.HardcoreFactions [testPlugin].executor&quot;: &quot;Debug&quot;,
+    &quot;JAR Application.Unnamed.executor&quot;: &quot;Debug&quot;,
+    &quot;Remote JVM Debug.Debug spigot.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/HCF/HCF&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/kazuto/HardcoreFactions&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Remote JVM Debug.Debug spigot">
     <configuration name="HCF [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -120,9 +102,60 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="HardcoreFactions [testPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="testPlugin" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Unnamed" type="JarApplication" nameIsGenerated="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/../server/server.jar" />
+      <option name="VM_PARAMETERS" value="-DIReallyKnowWhatIAmDoingISwear" />
+      <option name="PROGRAM_PARAMETERS" value="nogui" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../server" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Debug spigot" type="Remote" focusToolWindowBeforeRun="true">
+      <module name="HCF" />
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <option name="AUTO_RESTART" value="false" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="5005" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.HardcoreFactions [testPlugin]" />
+      <item itemvalue="Gradle.HCF [build]" />
+      <item itemvalue="JAR Application.Unnamed" />
+      <item itemvalue="Remote JVM Debug.Debug spigot" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.HCF [build]" />
+        <item itemvalue="Gradle.HardcoreFactions [testPlugin]" />
       </list>
     </recent_temporary>
   </component>

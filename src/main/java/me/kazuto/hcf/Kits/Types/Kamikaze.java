@@ -1,7 +1,13 @@
 package me.kazuto.hcf.Kits.Types;
 
+import me.kazuto.hcf.Config;
+import me.kazuto.hcf.Factions.FactionManager;
+import me.kazuto.hcf.Factions.Player.FactionPlayer;
+import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
+import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Kits.Kit;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,12 +38,33 @@ public class Kamikaze extends Kit implements Listener {
     @EventHandler
     public void playerDeath (PlayerDeathEvent event) {
         Player player = event.getPlayer();
+
         if(!isActive(player))
             return;
+
+        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
         Bukkit.broadcastMessage("active" + kamikazeSpeed.get(player));
-        if((kamikazeSpeed.get(player) < 40))
+        if((kamikazeSpeed.get(player) < Config.KAMIKAZE_REQUIRED_SPEED)) {
+            player.sendMessage(String.format("%sNot enough speed to detonate yourself.", Config.ERROR_COLOR));
             return;
-        Bukkit.broadcastMessage("Damage: Center: " + (kamikazeSpeed.get(player)/3) + "Side: " + ((kamikazeSpeed.get(player)/3) - 5*2));
+        }
+
+        for (Player nearbyPlayer : FactionPlayerManager.getInstance().getNearByPlayers(player, Config.KAMIKAZE_DAMAGE_RADIUS, true)) {
+            FactionPlayer nearbyFactionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(nearbyPlayer.getUniqueId());
+
+            if (!Config.KAMIKAZE_DAMAGE_TEAMMATES && FactionManager.getInstance().getFactionFromPlayer(nearbyFactionPlayer) == FactionManager.getInstance().getFactionFromPlayer(factionPlayer))
+                continue;
+
+            double distance = nearbyPlayer.getLocation().distance(player.getLocation());
+
+            if (distance >= Config.KAMIKAZE_DAMAGE_RADIUS)
+                continue;
+
+            Bukkit.broadcastMessage("kill");
+            nearbyPlayer.setHealth(nearbyPlayer.getHealth() - (1 - distance/Config.KAMIKAZE_DAMAGE_RADIUS)*Config.KAMIKAZE_DAMAGE_CENTER);
+
+        }
+        Bukkit.broadcastMessage(String.format("Damage: Centerrrrrr: " + kamikazeSpeed.get(player)/3 + "Side: " + ((kamikazeSpeed.get(player)/3) - 5*2)));
     }
 
 

@@ -30,7 +30,7 @@ public class FWhoArgument extends CommandArgument {
                     return false;
                 }
 
-                Player player = (Player) commandSender;
+                    Player player = (Player) commandSender;
                 FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
                 if (FactionManager.getInstance().getFactionFromPlayer(factionPlayer) == null) {
