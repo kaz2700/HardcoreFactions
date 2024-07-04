@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15fc85cb-44e0-4abd-b88a-a1533666a166" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FWhoArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FWhoArgument.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Types/Kamikaze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Types/Kamikaze.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -15,39 +15,40 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class KitListener implements Listener {
+    private final KitManager kitManager = KitManager.getInstance();
+    private final FactionPlayerManager factionPlayerManager = FactionPlayerManager.getInstance();
+    private final TimerManager timerManager = TimerManager.getInstance();
 
     @EventHandler
     public void onArmorChange(PlayerArmorChangeEvent event) {
         Player player = event.getPlayer();
-        Kit currentKit = KitManager.getInstance().getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
+        Kit currentKit = kitManager.getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
+        Kit existingKit = kitManager.getKitFromPlayer(player);
 
-        if(currentKit == null) {
-            Kit kit = KitManager.getInstance().getKitFromPlayer(player);
-            if (kit != null) {
-                KitManager.getInstance().removeFromPlayerKits(player, kit);
-                player.sendMessage(String.format("%sKit %s deactivated.", Config.WARNING_COLOR, kit.getName()));
-            }
+        if (existingKit == currentKit) {
             return;
         }
 
-        if(KitManager.getInstance().getKitFromPlayer(player) == currentKit) {
+        // If the new kit is null, remove the existing kit and notify the player
+        if (currentKit == null) {
+            kitManager.removeFromPlayerKits(player, existingKit);
+            player.sendMessage(String.format("%sKit %s deactivated.", Config.WARNING_COLOR, existingKit.getName()));
             return;
         }
         
-        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
+        FactionPlayer factionPlayer = factionPlayerManager.getPlayerFromUUID(player.getUniqueId());
         Timer classWarmUp = new Timer(Config.KIT_WARMUP_SECONDS, () -> {
             Bukkit.getServer().getPluginManager().callEvent(new KitActivateEvent(player, currentKit));
         });
         factionPlayer.setClassWarmUp(classWarmUp);
-        TimerManager.getInstance().addTimer(classWarmUp);
-
+        timerManager.addTimer(classWarmUp);
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        Kit currentKit = KitManager.getInstance().getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
+        Kit currentKit = kitManager.getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
         if (currentKit != null) {
             KitManager.getInstance().addToPlayerKits(player, currentKit);
             player.sendMessage(String.format("%sSwitched to %s kit.", Config.SUCCESS_COLOR, currentKit.getName()));
@@ -58,7 +59,7 @@ public class KitListener implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        Kit currentKit = KitManager.getInstance().getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
+        Kit currentKit = kitManager.getKitFromArmor(player.getInventory().getArmorContents()); //the kit that the player changed to wiht the armorchangeevent
         if (currentKit != null) {
             KitManager.getInstance().removeFromPlayerKits(player, currentKit);
             player.sendMessage(String.format("%sKit %s deactivated.", Config.WARNING_COLOR, currentKit.getName()));
