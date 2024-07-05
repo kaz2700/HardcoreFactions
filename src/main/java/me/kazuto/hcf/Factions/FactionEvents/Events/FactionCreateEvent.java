@@ -9,25 +9,21 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class FactionCreateEvent extends Event implements Cancellable {
-    private static final HandlerList handlers = new HandlerList();
-    @Getter
-    @Setter
-    private boolean cancelled;
-    @Getter
-    FactionPlayer player;
-    @Getter
-    Faction faction;
+  private static final HandlerList handlers = new HandlerList();
+  @Getter @Setter private boolean cancelled;
+  @Getter FactionPlayer player;
+  @Getter Faction faction;
 
-    public FactionCreateEvent(FactionPlayer player, Faction faction) {
-        this.player = player;
-        this.faction = faction;
-    }
+  public FactionCreateEvent(FactionPlayer player, Faction faction) {
+    this.player = player;
+    this.faction = faction;
+  }
 
-    public HandlerList getHandlers() {
-        return handlers;
-    }
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 }

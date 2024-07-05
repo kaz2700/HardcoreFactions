@@ -10,11 +10,11 @@ import org.bukkit.event.Listener;
 
 public class KitActivateListener implements Listener {
 
-    @EventHandler
-    public void kitActivate (KitActivateEvent event) {
-        Player player = event.getPlayer();
-        Kit kit = event.getKit();
-        KitManager.getInstance().addToPlayerKits(player, kit);
-        player.sendMessage(String.format("%s%s activated.", Config.SUCCESS_COLOR, kit.getName()));
-    }
+  @EventHandler
+  public void kitActivate(KitActivateEvent event) {
+    Player player = event.getPlayer();
+    Kit kit = event.getKit();
+    KitManager.getInstance().addToPlayerKits(player, kit);
+    player.sendMessage(String.format("%s%s activated.", Config.SUCCESS_COLOR, kit.getName()));
+  }
 }

@@ -12,14 +12,15 @@ import org.bukkit.event.Listener;
 
 public class FactionClaimListener implements Listener {
 
-    @EventHandler
-    public void onClaim (FactionClaimEvent event) {
-        Player player = event.getPlayer();
-        FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
+  @EventHandler
+  public void onClaim(FactionClaimEvent event) {
+    Player player = event.getPlayer();
+    FactionPlayer factionPlayer =
+        FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
-        PlayerFaction faction = event.getFaction();
+    PlayerFaction faction = event.getFaction();
 
-        faction.broadcastMessage(String.format("%sThe faction claimed land.", Config.SUCCESS_COLOR));
-        faction.setClaim(new Claim(factionPlayer.getPreClaimPos1(), factionPlayer.getPreClaimPos2()));
-    }
+    faction.broadcastMessage(String.format("%sThe faction claimed land.", Config.SUCCESS_COLOR));
+    faction.setClaim(new Claim(factionPlayer.getPreClaimPos1(), factionPlayer.getPreClaimPos2()));
+  }
 }

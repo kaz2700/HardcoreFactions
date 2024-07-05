@@ -9,21 +9,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class PlayerHitEnemyEvent implements Listener {
-    @EventHandler
-    public void playerHitPlayer(EntityDamageByEntityEvent event) {
-        if(event.isCancelled())
-            return;
+  @EventHandler
+  public void playerHitPlayer(EntityDamageByEntityEvent event) {
+    if (event.isCancelled()) return;
 
-        if(!(event.getDamager() instanceof Player agressor))
-            return;
+    if (!(event.getDamager() instanceof Player agressor)) return;
 
-        if(!(event.getEntity() instanceof Player victim))
-            return;
+    if (!(event.getEntity() instanceof Player victim)) return;
 
-        FactionPlayer agressorFactionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(agressor.getUniqueId());
-        FactionPlayer victimFactionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(victim.getUniqueId());
+    FactionPlayer agressorFactionPlayer =
+        FactionPlayerManager.getInstance().getPlayerFromUUID(agressor.getUniqueId());
+    FactionPlayer victimFactionPlayer =
+        FactionPlayerManager.getInstance().getPlayerFromUUID(victim.getUniqueId());
 
-        TimerManager.getInstance().addTimer(agressorFactionPlayer.getPvpTimer());
-        TimerManager.getInstance().addTimer(victimFactionPlayer.getPvpTimer());
-    }
+    TimerManager.getInstance().addTimer(agressorFactionPlayer.getPvpTimer());
+    TimerManager.getInstance().addTimer(victimFactionPlayer.getPvpTimer());
+  }
 }

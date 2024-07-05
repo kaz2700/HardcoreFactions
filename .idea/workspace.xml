@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="15fc85cb-44e0-4abd-b88a-a1533666a166" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +74,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
 }</component>
-  <component name="RunManager" selected="Remote JVM Debug.Debug spigot">
+  <component name="RunManager" selected="Gradle.HardcoreFactions [spotlessCheck]">
     <configuration name="HCF [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -87,6 +87,72 @@
         <option name="taskNames">
           <list>
             <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="HardcoreFactions [spotlessApply]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="spotlessApply" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="HardcoreFactions [spotlessCheck]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="spotlessCheck" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="HardcoreFactions [spotlessInternalRegisterDependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="spotlessInternalRegisterDependencies" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -142,6 +208,9 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Gradle.HardcoreFactions [spotlessApply]" />
+      <item itemvalue="Gradle.HardcoreFactions [spotlessCheck]" />
+      <item itemvalue="Gradle.HardcoreFactions [spotlessInternalRegisterDependencies]" />
       <item itemvalue="Gradle.HardcoreFactions [testPlugin]" />
       <item itemvalue="Gradle.HCF [build]" />
       <item itemvalue="JAR Application.Unnamed" />
@@ -149,6 +218,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.HardcoreFactions [spotlessCheck]" />
+        <item itemvalue="Gradle.HardcoreFactions [spotlessApply]" />
+        <item itemvalue="Gradle.HardcoreFactions [spotlessInternalRegisterDependencies]" />
         <item itemvalue="Gradle.HCF [build]" />
         <item itemvalue="Gradle.HardcoreFactions [testPlugin]" />
       </list>

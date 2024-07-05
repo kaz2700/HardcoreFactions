@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 group = "org.example"
@@ -18,4 +19,10 @@ dependencies {
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
+
+spotless {
+    java {
+        googleJavaFormat("1.19.2")
+    }
 }
