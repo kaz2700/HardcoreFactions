@@ -1,6 +1,9 @@
 package me.kazuto.hcf.Commands;
 
-import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,10 +18,18 @@ public class Test implements CommandExecutor {
       @NotNull Command command,
       @NotNull String label,
       @NotNull String[] args) {
-    if (!(sender instanceof Player player)) return false;
 
-    FactionPlayerManager.getInstance().getNearByPlayers(player, 5, true).stream()
-        .forEach(player1 -> Bukkit.broadcastMessage("player: " + player1.getName()));
+    if (!(sender instanceof Player)) return false;
+    Bukkit.broadcastMessage("a");
+    sender.sendMessage("doooonzo");
+
+    TextComponent component =
+        Component.text("click me")
+            .clickEvent(ClickEvent.runCommand("/test"))
+            .hoverEvent(HoverEvent.showText(Component.text("hi")));
+
+    sender.sendMessage(component);
+    sender.sendMessage("donzo");
     return true;
   }
 }

@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="15fc85cb-44e0-4abd-b88a-a1533666a166" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Commands/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Commands/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +31,23 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="HCF" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="HCF" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="HCF" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="HCF" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -59,22 +77,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build HardcoreFactions.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.HCF [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.HardcoreFactions [testPlugin].executor&quot;: &quot;Debug&quot;,
-    &quot;JAR Application.Unnamed.executor&quot;: &quot;Debug&quot;,
-    &quot;Remote JVM Debug.Debug spigot.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/kazuto/HardcoreFactions&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build HardcoreFactions.executor": "Run",
+    "Gradle.HCF [build].executor": "Run",
+    "Gradle.HardcoreFactions [spotlessApply].executor": "Run",
+    "Gradle.HardcoreFactions [spotlessCheck].executor": "Run",
+    "Gradle.HardcoreFactions [spotlessInternalRegisterDependencies].executor": "Run",
+    "Gradle.HardcoreFactions [testPlugin].executor": "Debug",
+    "JAR Application.Unnamed.executor": "Debug",
+    "Remote JVM Debug.Debug spigot.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/kazuto/HardcoreFactions",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
-  <component name="RunManager" selected="Gradle.HardcoreFactions [spotlessCheck]">
+}]]></component>
+  <component name="RunManager" selected="Gradle.HCF [build]">
     <configuration name="HCF [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -218,10 +239,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.HardcoreFactions [spotlessCheck]" />
-        <item itemvalue="Gradle.HardcoreFactions [spotlessApply]" />
-        <item itemvalue="Gradle.HardcoreFactions [spotlessInternalRegisterDependencies]" />
         <item itemvalue="Gradle.HCF [build]" />
+        <item itemvalue="Gradle.HardcoreFactions [spotlessApply]" />
+        <item itemvalue="Gradle.HardcoreFactions [spotlessCheck]" />
+        <item itemvalue="Gradle.HardcoreFactions [spotlessInternalRegisterDependencies]" />
         <item itemvalue="Gradle.HardcoreFactions [testPlugin]" />
       </list>
     </recent_temporary>

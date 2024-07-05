@@ -19,7 +19,6 @@ saving factions n shi
 allies
 
 optional java???
-autoformat (fuck that)
 
 
 
