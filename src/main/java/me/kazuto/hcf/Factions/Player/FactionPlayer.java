@@ -1,61 +1,102 @@
+/* (Copyright) 2024 github.com/kaz2700 */
 package me.kazuto.hcf.Factions.Player;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
+import me.kazuto.hcf.Config;
+import me.kazuto.hcf.Factions.Claim.Claim;
 import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Timers.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.jetbrains.annotations.NotNull;
 
-public class FactionPlayer {
-  @Getter @Setter UUID uuid;
+public class FactionPlayer implements ConfigurationSerializable {
+	@Getter
+	@Setter
+	UUID uuid;
 
-  @Getter @Setter int balance;
+	@Getter
+	@Setter
+	int balance;
 
-  @Getter @Setter int kills;
+	@Getter
+	@Setter
+	Location preClaimPos1;
 
-  @Getter @Setter int deaths;
+	@Getter
+	@Setter
+	Location preClaimPos2;
 
-  @Getter @Setter int playtime;
+	@Getter
+	Timer pvpTimer;
 
-  @Getter @Setter Location preClaimPos1;
+	@Getter
+	@Setter
+	Timer classWarmUp;
 
-  @Getter @Setter Location preClaimPos2;
+	@Getter
+	@Setter
+	boolean activeFMap;
 
-  @Getter Timer pvpTimer;
+	public FactionPlayer(UUID uuid) {
+		this.uuid = uuid;
+		this.setBalance(Config.INITIAL_BALANCE);
+		preClaimPos1 = null;
+		preClaimPos2 = null;
+		this.pvpTimer = new Timer(30.0);
+		this.activeFMap = false;
+	}
 
-  @Getter @Setter Timer classWarmUp;
+	public FactionPlayer(UUID uuid, int balance) {
+		this.uuid = uuid;
+		this.setBalance(balance);
+		preClaimPos1 = null;
+		preClaimPos2 = null;
+		this.pvpTimer = new Timer(30.0);
+		this.activeFMap = false;
+	}
 
-  @Getter Timer pearlCoolDown;
+	public OfflinePlayer getOfflinePlayer() {
+		return Bukkit.getOfflinePlayer(getUuid());
+	}
 
-  public FactionPlayer(UUID uuid) {
-    this.uuid = uuid;
-    this.setBalance(100);
-    preClaimPos1 = null;
-    preClaimPos2 = null;
-    this.pvpTimer = new Timer(30.0);
-  }
+	public String getName() {
+		return getOfflinePlayer().getName();
+	}
 
-  public OfflinePlayer getOfflinePlayer() {
-    return Bukkit.getOfflinePlayer(getUuid());
-  }
+	public PlayerFaction getFaction() {
+		return FactionManager.getInstance().getFactionFromPlayer(this);
+	}
 
-  public String getName() {
-    return getOfflinePlayer().getName();
-  }
+	public boolean hasAFaction() {
+		return getFaction() != null;
+	}
 
-  public PlayerFaction getFaction() {
-    return FactionManager.getInstance().getFactionFromPlayer(this);
-  }
+	public boolean isOnline() {
+		return getOfflinePlayer().isOnline();
+	}
 
-  public boolean hasAFaction() {
-    return getFaction() != null;
-  }
+	@Override
+	public @NotNull Map<String, Object> serialize() {
+		Map<String, Object> serializedMap = new HashMap<>();
+		serializedMap.put("uuid", uuid);
+		serializedMap.put("balance", balance);
 
-  public boolean isOnline() {
-    return getOfflinePlayer().isOnline();
-  }
+		return serializedMap;
+	}
+
+	public static FactionPlayer deserialize(Map<String, Object> serializedMap) {
+		UUID uuid = (UUID) serializedMap.get("uuid");
+		int balance = (int) serializedMap.get("balance");
+		return new FactionPlayer(uuid, balance);
+	}
 }

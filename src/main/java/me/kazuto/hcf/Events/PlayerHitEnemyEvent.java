@@ -1,3 +1,4 @@
+/* (Copyright) 2024 github.com/kaz2700 */
 package me.kazuto.hcf.Events;
 
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
@@ -9,20 +10,23 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class PlayerHitEnemyEvent implements Listener {
-  @EventHandler
-  public void playerHitPlayer(EntityDamageByEntityEvent event) {
-    if (event.isCancelled()) return;
+	FactionPlayerManager factionPlayerManager = FactionPlayerManager.getInstance();
+	TimerManager timerManager = TimerManager.getInstance();
+	@EventHandler
+	public void playerHitPlayer(EntityDamageByEntityEvent event) {
+		if (event.isCancelled()) // its cancelled if its in safe zone/same faction
+			return;
 
-    if (!(event.getDamager() instanceof Player agressor)) return;
+		if (!(event.getDamager() instanceof Player damager))
+			return;
 
-    if (!(event.getEntity() instanceof Player victim)) return;
+		if (!(event.getEntity() instanceof Player victim))
+			return;
 
-    FactionPlayer agressorFactionPlayer =
-        FactionPlayerManager.getInstance().getPlayerFromUUID(agressor.getUniqueId());
-    FactionPlayer victimFactionPlayer =
-        FactionPlayerManager.getInstance().getPlayerFromUUID(victim.getUniqueId());
+		FactionPlayer agressorFactionPlayer = factionPlayerManager.getPlayerFromUUID(damager.getUniqueId());
+		FactionPlayer victimFactionPlayer = factionPlayerManager.getPlayerFromUUID(victim.getUniqueId());
 
-    TimerManager.getInstance().addTimer(agressorFactionPlayer.getPvpTimer());
-    TimerManager.getInstance().addTimer(victimFactionPlayer.getPvpTimer());
-  }
+		timerManager.addTimer(agressorFactionPlayer.getPvpTimer());
+		timerManager.addTimer(victimFactionPlayer.getPvpTimer());
+	}
 }

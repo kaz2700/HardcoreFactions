@@ -1,3 +1,4 @@
+/* (Copyright) 2024 github.com/kaz2700 */
 package me.kazuto.hcf.Factions.FactionEvents;
 
 import me.kazuto.hcf.Config;
@@ -9,12 +10,11 @@ import org.bukkit.event.Listener;
 
 public class FactionJoinListener implements Listener {
 
-  @EventHandler
-  public void onJoin(FactionJoinEvent event) {
+	@EventHandler
+	public void onJoin(FactionJoinEvent event) {
 
-    PlayerFaction faction = event.getFaction();
-    Player player = event.getPlayer();
-    faction.broadcastMessage(
-        String.format("%s%s joined the faction.", Config.PRIMARY_COLOR, player.getName()));
-  }
+		PlayerFaction faction = event.getFaction();
+		Player player = event.getPlayer();
+		faction.broadcastMessage(String.format("%s%s joined the faction.", Config.PRIMARY_COLOR, player.getName()));
+	}
 }

@@ -17,6 +17,9 @@ prepare map w roads n shi
 world borders
 saving factions n shi
 allies
+		Faction faction = new Faction(name, claimPriority); //todo constructor that takes map stirng objcect and desierializes everyting
+
+activate and deactivate colors in config
 
 optional java???
 

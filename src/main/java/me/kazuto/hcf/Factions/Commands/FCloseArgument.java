@@ -1,3 +1,4 @@
+/* (Copyright) 2024 github.com/kaz2700 */
 package me.kazuto.hcf.Factions.Commands;
 
 import me.kazuto.hcf.Config;
@@ -11,57 +12,47 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class FCloseArgument extends CommandArgument {
-  public FCloseArgument() {
-    super("close", "Close your faction to the public.", "/f close");
-  }
+	public FCloseArgument() {
+		super("close", "Close your faction to the public.", "/f close");
+	}
 
-  @Override
-  public boolean onCommand(
-      CommandSender commandSender, Command command, String s, String[] strings) {
-    if (!(commandSender instanceof Player player)) {
-      commandSender.sendMessage(
-          String.format(
-              "%s%sYou are the console so you don't have a faction!",
-              Config.ERROR_COLOR, Config.ERROR_PREFIX));
-      return false;
-    }
+	@Override
+	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+		if (!(commandSender instanceof Player player)) {
+			commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction!",
+					Config.ERROR_COLOR, Config.ERROR_PREFIX));
+			return false;
+		}
 
-    if (strings.length != 1) {
-      player.sendMessage(
-          String.format(
-              "%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
-      return false;
-    }
+		if (strings.length != 1) {
+			player.sendMessage(
+					String.format("%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
+			return false;
+		}
 
-    FactionPlayer factionPlayer =
-        FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
+		FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 
-    if (!factionPlayer.hasAFaction()) {
-      player.sendMessage(
-          String.format("%s%sYou are not in a faction.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
-      return false;
-    }
+		if (!factionPlayer.hasAFaction()) {
+			player.sendMessage(String.format("%s%sYou are not in a faction.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
+			return false;
+		}
 
-    PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
+		PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
 
-    if (faction.getLeader() != factionPlayer) {
-      player.sendMessage(
-          String.format(
-              "%s%sYou are not the leader of the faction.",
-              Config.ERROR_COLOR, Config.ERROR_PREFIX));
-      return false;
-    }
+		if (faction.getLeader() != factionPlayer) {
+			player.sendMessage(String.format("%s%sYou are not the leader of the faction.", Config.ERROR_COLOR,
+					Config.ERROR_PREFIX));
+			return false;
+		}
 
-    if (!faction.isOpen()) {
-      player.sendMessage(
-          String.format("%s%sYour faction is not open.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
-      return false;
-    }
+		if (!faction.isOpen()) {
+			player.sendMessage(String.format("%s%sYour faction is not open.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
+			return false;
+		}
 
-    faction.broadcastMessage(
-        String.format("%sYour faction has been closed.", Config.WARNING_COLOR));
-    faction.setOpen(false);
+		faction.broadcastMessage(String.format("%sYour faction has been closed.", Config.WARNING_COLOR));
+		faction.setOpen(false);
 
-    return true;
-  }
+		return true;
+	}
 }

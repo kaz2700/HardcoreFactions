@@ -1,3 +1,4 @@
+/* (Copyright) 2024 github.com/kaz2700 */
 package me.kazuto.hcf.Kits.KitEvents.Events;
 
 import lombok.Getter;
@@ -9,24 +10,28 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class KitActivateEvent extends Event implements Cancellable {
-  private static final HandlerList handlers = new HandlerList();
+	private static final HandlerList handlers = new HandlerList();
 
-  @Getter @Setter private boolean cancelled;
+	@Getter
+	@Setter
+	private boolean cancelled;
 
-  @Getter private Player player;
+	@Getter
+	private Player player;
 
-  @Getter private Kit kit;
+	@Getter
+	private Kit kit;
 
-  public KitActivateEvent(Player player, Kit kit) {
-    this.player = player;
-    this.kit = kit;
-  }
+	public KitActivateEvent(Player player, Kit kit) {
+		this.player = player;
+		this.kit = kit;
+	}
 
-  public HandlerList getHandlers() {
-    return handlers;
-  }
+	public HandlerList getHandlers() {
+		return handlers;
+	}
 
-  public static HandlerList getHandlerList() {
-    return handlers;
-  }
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
 }

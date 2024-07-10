@@ -5,8 +5,69 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15fc85cb-44e0-4abd-b88a-a1533666a166" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/CreateFactionPlayerOnJoinEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Commands/Money/Balance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Commands/Money/Balance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Commands/Money/Pay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Commands/Money/Pay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Commands/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Commands/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/ChatEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/ChatEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/JoinEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/PlayerHitEnemyEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/PlayerHitEnemyEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/PlayerHitTeamEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/PlayerHitTeamEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Claim/Claim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Claim/Claim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Claim/ClaimListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Claim/ClaimListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Claim/ClaimingWand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Claim/ClaimingWand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FClaimArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FClaimArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FCloseArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FCloseArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FCreateArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FCreateArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FDisbandArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FDisbandArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FInviteArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FInviteArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FJoinArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FJoinArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FLeaveArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FLeaveArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FListArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FListArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FOpenArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FOpenArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FUninviteArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FUninviteArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FWhoArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FWhoArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FactionExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FactionExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Faction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Faction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionClaimEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionClaimEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionCloseEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionCloseEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionCreateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionCreateEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionDisbandEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionDisbandEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionInviteEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionInviteEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionJoinEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionJoinEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionLeaveEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionLeaveEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionOpenEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionOpenEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionUninviteEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/Events/FactionUninviteEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionClaimListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionClaimListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionCloseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionCloseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionCreateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionCreateListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionEvents/FactionJoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/FactionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Player/FactionPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Player/FactionPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Player/FactionPlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Player/FactionPlayerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/PlayerFaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/PlayerFaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/Spawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/Spawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/Wilderness.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/Wilderness.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Utils/ArgumentExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Utils/ArgumentExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Utils/CommandArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Utils/CommandArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Kit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Kit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitEvents/Events/KitActivateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitEvents/Events/KitActivateEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitEvents/Listener/KitActivateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitEvents/Listener/KitActivateListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/KitManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Types/Bard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Types/Bard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Types/Kamikaze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Kits/Types/Kamikaze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/Implementation/FastBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/Implementation/FastBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/Implementation/FastBoardBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/Implementation/FastBoardBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/Implementation/FastReflection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/Implementation/FastReflection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/ScoreboardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Scoreboard/ScoreboardManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Timers/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Timers/Timer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Timers/TimerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Timers/TimerManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +110,11 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="verification" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="HCF" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -66,6 +132,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -77,24 +146,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build HardcoreFactions.executor": "Run",
-    "Gradle.HCF [build].executor": "Run",
-    "Gradle.HardcoreFactions [spotlessApply].executor": "Run",
-    "Gradle.HardcoreFactions [spotlessCheck].executor": "Run",
-    "Gradle.HardcoreFactions [spotlessInternalRegisterDependencies].executor": "Run",
-    "Gradle.HardcoreFactions [testPlugin].executor": "Debug",
-    "JAR Application.Unnamed.executor": "Debug",
-    "Remote JVM Debug.Debug spigot.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/kazuto/HardcoreFactions",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build HardcoreFactions.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.HCF [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.HardcoreFactions [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.HardcoreFactions [spotlessApply].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.HardcoreFactions [spotlessCheck].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.HardcoreFactions [spotlessInternalRegisterDependencies].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.HardcoreFactions [testPlugin].executor&quot;: &quot;Debug&quot;,
+    &quot;JAR Application.Unnamed.executor&quot;: &quot;Debug&quot;,
+    &quot;Remote JVM Debug.Debug spigot.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/kazuto/HardcoreFactions&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Gradle.HCF [build]">
     <configuration name="HCF [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -108,6 +178,28 @@
         <option name="taskNames">
           <list>
             <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="HardcoreFactions [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -184,28 +276,6 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="HardcoreFactions [testPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="testPlugin" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="Unnamed" type="JarApplication" nameIsGenerated="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/../server/server.jar" />
       <option name="VM_PARAMETERS" value="-DIReallyKnowWhatIAmDoingISwear" />
@@ -229,10 +299,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Gradle.HardcoreFactions [jar]" />
       <item itemvalue="Gradle.HardcoreFactions [spotlessApply]" />
       <item itemvalue="Gradle.HardcoreFactions [spotlessCheck]" />
       <item itemvalue="Gradle.HardcoreFactions [spotlessInternalRegisterDependencies]" />
-      <item itemvalue="Gradle.HardcoreFactions [testPlugin]" />
       <item itemvalue="Gradle.HCF [build]" />
       <item itemvalue="JAR Application.Unnamed" />
       <item itemvalue="Remote JVM Debug.Debug spigot" />
@@ -241,9 +311,9 @@
       <list>
         <item itemvalue="Gradle.HCF [build]" />
         <item itemvalue="Gradle.HardcoreFactions [spotlessApply]" />
+        <item itemvalue="Gradle.HardcoreFactions [jar]" />
         <item itemvalue="Gradle.HardcoreFactions [spotlessCheck]" />
         <item itemvalue="Gradle.HardcoreFactions [spotlessInternalRegisterDependencies]" />
-        <item itemvalue="Gradle.HardcoreFactions [testPlugin]" />
       </list>
     </recent_temporary>
   </component>
