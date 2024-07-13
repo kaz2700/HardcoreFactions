@@ -1,12 +1,16 @@
 /* (Copyright) 2024 github.com/kaz2700 */
 package me.kazuto.hcf.Factions.Types;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.kazuto.hcf.Database.DataBase;
 import me.kazuto.hcf.Factions.Claim.Claim;
 import me.kazuto.hcf.Factions.Faction;
+import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import org.bukkit.Bukkit;
@@ -14,17 +18,19 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.jetbrains.annotations.NotNull;
 
-public class PlayerFaction extends Faction implements ConfigurationSerializable {
-	@Getter
-	ArrayList<FactionPlayer> players = new ArrayList<>();
-	@Getter
-	ArrayList<FactionPlayer> coleaders = new ArrayList<>();
-	@Getter
-	ArrayList<FactionPlayer> captains = new ArrayList<>();
+public class PlayerFaction extends Faction {
 
 	@Getter
-	ArrayList<FactionPlayer> invitedPlayers = new ArrayList<>();
+	private ArrayList<FactionPlayer> players = new ArrayList<>();
+	@Getter
+	private ArrayList<FactionPlayer> coleaders = new ArrayList<>();
+	@Getter
+	private ArrayList<FactionPlayer> captains = new ArrayList<>();
+	@Getter
+	private ArrayList<FactionPlayer> invitedPlayers = new ArrayList<>();
 
+	@Getter
+	private final UUID uuid;
 	@Getter
 	@Setter
 	int balance;
@@ -48,6 +54,7 @@ public class PlayerFaction extends Faction implements ConfigurationSerializable 
 	public PlayerFaction(String name, FactionPlayer leader) {
 		super(name, 1);
 		this.leader = leader;
+		this.uuid = UUID.randomUUID();
 		addPlayer(leader);
 	}
 
@@ -91,7 +98,7 @@ public class PlayerFaction extends Faction implements ConfigurationSerializable 
 			}
 			listOfPlayerNames.append(color).append(" ").append(factionPlayer.getName());
 		}
-		return String.format("Faction: %s\nPlayers:%s", getName(), listOfPlayerNames);
+		return String.format("Faction: %s\nPlayers: %s\nBalance: %s", getName(), listOfPlayerNames, getBalance());
 	}
 
 	public List<FactionPlayer> getOnlinePlayers() {
@@ -111,34 +118,28 @@ public class PlayerFaction extends Faction implements ConfigurationSerializable 
 		return getPlayers().contains(factionPlayer);
 	}
 
-	@Override
-	public @NotNull Map<String, Object> serialize() {
-		Map<String, Object> serializedMap = new HashMap<>();
-		serializedMap.put("name", getName());
-		serializedMap.put("claimPriority", getClaimPriority());
-		serializedMap.put("isRaidable", isRaidable());
-		serializedMap.put("leaderUuid", getLeader().getUuid());
+	public void save() {
+		try {
+			String sql = "INSERT INTO factions (uuid, name, balance, dtr, announcement, isOpen, claim) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?) " + "ON CONFLICT (uuid) "
+					+ "DO UPDATE SET name = EXCLUDED.name, balance = EXCLUDED.balance, dtr = EXCLUDED.dtr, announcement = EXCLUDED.announcement, isOpen = EXCLUDED.isOpen, claim = EXCLUDED.claim";
+			PreparedStatement preparedStatement = DataBase.getInstance().getConnection().prepareStatement(sql);
 
-		Object claim = Optional.ofNullable(getClaim()).map(Claim::serialize).orElse(null);
-		serializedMap.put("claim", claim);
+			preparedStatement.setObject(1, getUuid());
+			preparedStatement.setString(2, getName());
+			preparedStatement.setInt(3, getBalance());
+			preparedStatement.setFloat(4, getDtr());
+			preparedStatement.setString(5, getAnnouncement());
+			preparedStatement.setBoolean(6, isOpen());
 
-		return serializedMap;
-	}
+			Claim claim = getClaim();
+			preparedStatement.setString(7, claim != null ? claim.serialize().toString() : null);
 
-	public static PlayerFaction deserialize(Map<String, Object> serializedMap) {
-		String name = (String) serializedMap.get("name");
-		int claimPriority = (int) serializedMap.get("claimPriority");
-		boolean isRaidable = (boolean) serializedMap.get("isRaidable");
-		UUID leaderUuid = (UUID) serializedMap.get("leaderUuid");
+			preparedStatement.executeUpdate();
 
-		FactionPlayer leader = new FactionPlayer(leaderUuid);
-		PlayerFaction faction = new PlayerFaction(name, leader); // todo constructor that takes map stirng objcect and
-
-		Bukkit.getServer().getConsoleSender().sendMessage("aaaaaaaaaaaaaaaaaaaaa\n" + serializedMap.get("claim"));
-		if (serializedMap.get("claim") != null)
-			faction.setClaim(Claim.deserialize((Map<String, Object>) serializedMap.get("claim")));
-		faction.setRaidable(isRaidable);
-
-		return faction;
+			preparedStatement.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

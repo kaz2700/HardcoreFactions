@@ -14,9 +14,6 @@ public class Faction {
 	private Claim claim;
 	@Getter
 	int claimPriority;
-	@Getter
-	@Setter
-	boolean isRaidable = false;
 
 	public Faction(String name, int claimPriority) {
 		this.name = name;

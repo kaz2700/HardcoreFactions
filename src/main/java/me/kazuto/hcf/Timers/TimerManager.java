@@ -35,7 +35,6 @@ public class TimerManager {
 	}
 
 	private static TimerManager instance;
-
 	public static TimerManager getInstance() {
 		if (instance == null)
 			instance = new TimerManager();

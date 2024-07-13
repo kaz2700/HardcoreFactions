@@ -1,51 +1,47 @@
 /* (Copyright) 2024 github.com/kaz2700 */
 package me.kazuto.hcf.Factions.Player;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 import me.kazuto.hcf.Config;
-import me.kazuto.hcf.Factions.Claim.Claim;
+import me.kazuto.hcf.Database.DataBase;
 import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Timers.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.jetbrains.annotations.NotNull;
 
-public class FactionPlayer implements ConfigurationSerializable {
+public class FactionPlayer {
 	@Getter
 	@Setter
-	UUID uuid;
+	private UUID uuid;
 
 	@Getter
 	@Setter
-	int balance;
+	private int balance;
 
 	@Getter
 	@Setter
-	Location preClaimPos1;
+	private Location preClaimPos1;
 
 	@Getter
 	@Setter
-	Location preClaimPos2;
+	private Location preClaimPos2;
 
 	@Getter
-	Timer pvpTimer;
-
-	@Getter
-	@Setter
-	Timer classWarmUp;
+	private Timer pvpTimer;
 
 	@Getter
 	@Setter
-	boolean activeFMap;
+	private Timer classWarmUp;
+
+	@Getter
+	@Setter
+	private boolean activeFMap;
 
 	public FactionPlayer(UUID uuid) {
 		this.uuid = uuid;
@@ -85,18 +81,23 @@ public class FactionPlayer implements ConfigurationSerializable {
 		return getOfflinePlayer().isOnline();
 	}
 
-	@Override
-	public @NotNull Map<String, Object> serialize() {
-		Map<String, Object> serializedMap = new HashMap<>();
-		serializedMap.put("uuid", uuid);
-		serializedMap.put("balance", balance);
+	public void save() {
+		try {
+			String sql = "INSERT INTO players (uuid, balance, factionId) " + "VALUES (?, ?, ?) " + "ON CONFLICT (uuid) "
+					+ "DO UPDATE SET balance = EXCLUDED.balance, factionId = EXCLUDED.factionId";
+			PreparedStatement preparedStatement = DataBase.getInstance().getConnection().prepareStatement(sql);
 
-		return serializedMap;
-	}
+			preparedStatement.setObject(1, getUuid());
+			preparedStatement.setInt(2, getBalance());
 
-	public static FactionPlayer deserialize(Map<String, Object> serializedMap) {
-		UUID uuid = (UUID) serializedMap.get("uuid");
-		int balance = (int) serializedMap.get("balance");
-		return new FactionPlayer(uuid, balance);
+			PlayerFaction faction = getFaction();
+			preparedStatement.setObject(3, faction != null ? faction.getUuid() : null);
+
+			preparedStatement.executeUpdate();
+
+			preparedStatement.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

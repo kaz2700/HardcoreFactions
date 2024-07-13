@@ -1,15 +1,19 @@
 /* (Copyright) 2024 github.com/kaz2700 */
 package me.kazuto.hcf.Factions.Player;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lombok.Getter;
+import me.kazuto.hcf.Database.DataBase;
+import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+@Getter
 public class FactionPlayerManager {
-	@Getter
 	ArrayList<FactionPlayer> players = new ArrayList<>();
 
 	public void createFactionPlayer(UUID uuid) {
@@ -37,6 +41,12 @@ public class FactionPlayerManager {
 			boolean isNotSelf = ignoreSelf ? !player1.getUniqueId().equals(player.getUniqueId()) : true;
 			return withinRadius && isNotSelf;
 		}).toList();
+	}
+
+	public void savePlayers() {
+		for (FactionPlayer player : getPlayers()) {
+			player.save();
+		}
 	}
 
 	private static FactionPlayerManager instance = null;

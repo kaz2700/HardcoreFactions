@@ -4,7 +4,6 @@ package me.kazuto.hcf.Commands.Money;
 import me.kazuto.hcf.Config;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -39,38 +38,38 @@ public class Pay implements CommandExecutor {
 
 		FactionPlayer moneySenderFactionPlayer = factionPlayerManager.getPlayerFromUUID(moneySender.getUniqueId());
 
-		int ammount = 0;
+		int amount;
 		try {
-			ammount = Integer.parseInt(strings[1]);
+			amount = Integer.parseInt(strings[1]);
 		} catch (NumberFormatException exception) {
 			moneySender.sendMessage(
-					String.format("%s%sAmmount must be an integer!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
+					String.format("%s%sAmount must be an integer!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
 			return false;
 		}
 
-		if (ammount <= 0) {
+		if (amount <= 0) {
 			moneySender.sendMessage(
-					String.format("%s%sAmmount must be positive!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
+					String.format("%s%sAmount must be positive!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
 			return false;
 		}
 
 		int playerBalance = moneySenderFactionPlayer.getBalance();
 
-		if (ammount > playerBalance) {
+		if (amount > playerBalance) {
 			moneySender.sendMessage(String.format("%s%sNot enough money!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
 			return false;
 		}
 
-		moneySenderFactionPlayer.setBalance(playerBalance - ammount);
-		payedFactionPlayer.setBalance(payedFactionPlayer.getBalance() + ammount);
+		moneySenderFactionPlayer.setBalance(playerBalance - amount);
+		payedFactionPlayer.setBalance(payedFactionPlayer.getBalance() + amount);
 
-		moneySender.sendMessage(String.format("%sYou sent $%s to %s.", Config.NOTIFICATION_COLOR, ammount,
+		moneySender.sendMessage(String.format("%sYou sent $%s to %s.", Config.NOTIFICATION_COLOR, amount,
 				payedFactionPlayer.getName()));
 
 		OfflinePlayer payedPlayer = payedFactionPlayer.getOfflinePlayer();
 		if (payedPlayer.isOnline())
-			moneySender.sendMessage(String.format("%s%s payed you $%s. Don't forget to say thanks!",
-					Config.NOTIFICATION_COLOR, moneySenderFactionPlayer.getName(), ammount));
+			payedPlayer.getPlayer().sendMessage(String.format("%s%s payed you $%s. Don't forget to say thanks!",
+					Config.NOTIFICATION_COLOR, moneySenderFactionPlayer.getName(), amount));
 
 		return true;
 	}

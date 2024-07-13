@@ -3,26 +3,18 @@ make chat pretty
 events (koths, sotw, eotw, )
 f invites
 cooldown on commands
-kamikze kit
-tnt tag kit
 info player
 bard effect so niggas levitate except kits maybe??? idk think
-armadillo kit pushes niggas when hit
-bard can hold effects in both hands
-good time for kit effects
 if drop claiming wand it disapear
-cant claim in nether andend
+cant claim in nether andend and under 1k
 fix shit & config
-prepare map w roads n shi
 world borders
-saving factions n shi
 allies
-		Faction faction = new Faction(name, claimPriority); //todo constructor that takes map stirng objcect and desierializes everyting
-
+constructor that takes map stirng objcect and desierializes everyting
 activate and deactivate colors in config
 
-optional java???
 
-
-
+ideas:
 mundial of factions
+armadillo kit pushes niggas when hit
+tnt tag kit

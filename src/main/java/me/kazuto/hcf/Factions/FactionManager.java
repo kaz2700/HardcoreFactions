@@ -1,13 +1,20 @@
 /* (Copyright) 2024 github.com/kaz2700 */
 package me.kazuto.hcf.Factions;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.Getter;
 import me.kazuto.hcf.Config;
+import me.kazuto.hcf.Database.DataBase;
 import me.kazuto.hcf.Factions.Claim.Claim;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Types.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
 public class FactionManager {
@@ -97,6 +104,27 @@ public class FactionManager {
 			}
 		}
 		return highestPriorityFaction;
+	}
+
+	public void saveFactions() {
+		for (PlayerFaction faction : getPlayerFactions()) {
+			faction.save();
+		}
+	}
+
+	public void loadFactions() {
+		try {
+			String sql = "SELECT * FROM factions";
+			PreparedStatement preparedStatement = DataBase.getInstance().getConnection().prepareStatement(sql);
+			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "testing");
+			var result = preparedStatement.executeQuery();
+			while (result.next()) {
+				Bukkit.getConsoleSender().sendMessage("faction");
+			}
+			preparedStatement.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private static FactionManager instance;
