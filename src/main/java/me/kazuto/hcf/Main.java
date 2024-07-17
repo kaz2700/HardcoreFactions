@@ -98,6 +98,7 @@ public class Main extends JavaPlugin implements Listener {
 
 	public void loadData() {
 		FactionManager.getInstance().loadFactions();
+		FactionPlayerManager.getInstance().loadPlayers();
 		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Data loaded.");
 	}
 }

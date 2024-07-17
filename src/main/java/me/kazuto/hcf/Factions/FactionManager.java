@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import lombok.Getter;
 import me.kazuto.hcf.Config;
@@ -116,11 +117,11 @@ public class FactionManager {
 		try {
 			String sql = "SELECT * FROM factions";
 			PreparedStatement preparedStatement = DataBase.getInstance().getConnection().prepareStatement(sql);
-			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "testing");
 			var result = preparedStatement.executeQuery();
 			while (result.next()) {
-				Bukkit.getConsoleSender().sendMessage("faction");
+				factions.add(PlayerFaction.getPlayerFactionFromDataBase(result));
 			}
+			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "testing factions");
 			preparedStatement.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

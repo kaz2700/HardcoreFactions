@@ -2,9 +2,12 @@
 package me.kazuto.hcf.Factions.Types;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
 import lombok.Setter;
 import me.kazuto.hcf.Database.DataBase;
@@ -30,7 +33,8 @@ public class PlayerFaction extends Faction {
 	private ArrayList<FactionPlayer> invitedPlayers = new ArrayList<>();
 
 	@Getter
-	private final UUID uuid;
+	@Setter
+	private UUID uuid;
 	@Getter
 	@Setter
 	int balance;
@@ -43,13 +47,47 @@ public class PlayerFaction extends Faction {
 	@Setter
 	String announcement;
 
-	@Getter
 	@Setter
+	@Getter
 	FactionPlayer leader;
 
 	@Getter
 	@Setter
 	boolean isOpen;
+
+	public static PlayerFaction getPlayerFactionFromDataBase(ResultSet row) throws SQLException {
+		UUID uuid = UUID.fromString(row.getString(row.findColumn("uuid")));
+		int balance = row.getInt(row.findColumn("balance"));
+		float dtr = row.getFloat(row.findColumn("dtr"));
+		String announcement = row.getString(row.findColumn("announcement"));
+		boolean isOpen = row.getBoolean(row.findColumn("isOpen"));
+		String name = row.getString(row.findColumn("name"));
+
+		PlayerFaction faction = new PlayerFaction(name);
+
+		Claim claim = null;
+		String claimString = row.getString(row.findColumn("claim"));
+		if (claimString != null) {
+			claim = Claim.deserialize(claimString);
+		}
+
+		faction.setUuid(uuid);
+		faction.setBalance(balance);
+		faction.setDtr(dtr);
+		faction.setAnnouncement(announcement);
+		faction.setOpen(isOpen);
+		faction.setName(name);
+		faction.setClaim(claim);
+
+		Bukkit.getConsoleSender().sendMessage("loaded facion: " + row.getString(row.findColumn("name")));
+
+		return faction;
+	}
+
+	public PlayerFaction(String name) {
+		super(name, 1);
+		this.uuid = UUID.randomUUID();
+	}
 
 	public PlayerFaction(String name, FactionPlayer leader) {
 		super(name, 1);
@@ -133,7 +171,7 @@ public class PlayerFaction extends Faction {
 			preparedStatement.setBoolean(6, isOpen());
 
 			Claim claim = getClaim();
-			preparedStatement.setString(7, claim != null ? claim.serialize().toString() : null);
+			preparedStatement.setString(7, claim != null ? claim.serialize() : null);
 
 			preparedStatement.executeUpdate();
 

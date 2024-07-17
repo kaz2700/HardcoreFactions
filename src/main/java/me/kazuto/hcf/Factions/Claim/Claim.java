@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.jetbrains.annotations.NotNull;
 
-public class Claim implements ConfigurationSerializable {
+public class Claim {
 	@Getter
 	@Setter
 	Location pos1;
@@ -44,17 +47,27 @@ public class Claim implements ConfigurationSerializable {
 		return claimCorners;
 	}
 
-	@Override
-	public @NotNull Map<String, Object> serialize() {
-		Map<String, Object> serializedMap = new HashMap<>();
-		serializedMap.put("pos1", getPos1());
-		serializedMap.put("pos2", getPos2());
-		return serializedMap;
+	public String serialize() {
+		return String.format("""
+					{
+						"pos1": "%s",
+						"pos2": "%s"
+					}
+				""", new Gson().toJson(getPos1().serialize()), new Gson().toJson(getPos2().serialize()));
 	}
 
-	public static Claim deserialize(Map<String, Object> serializedMap) {
-		Location pos1 = (Location) serializedMap.get("pos1");
-		Location pos2 = (Location) serializedMap.get("pos2");
+	public static Claim deserialize(String serializedJson) {
+		Map<String, String> mapClaim = new Gson().fromJson(serializedJson, new TypeToken<Map<String, String>>() {
+		}.getType());
+
+		String pos1Json = mapClaim.get("pos1");
+		Location pos1 = Location.deserialize(new Gson().fromJson(pos1Json, new TypeToken<Map<String, String>>() {
+		}.getType()));
+
+		String pos2Json = mapClaim.get("pos2");
+		Location pos2 = Location.deserialize(new Gson().fromJson(pos2Json, new TypeToken<Map<String, String>>() {
+		}.getType()));
+
 		return new Claim(pos1, pos2);
 	}
 }

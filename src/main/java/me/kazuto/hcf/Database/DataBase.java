@@ -21,6 +21,7 @@ public class DataBase {
 			Bukkit.getConsoleSender().sendMessage(String.format("%sConnected to the database!", Config.SUCCESS_COLOR));
 
 		} catch (Exception e) {
+			Bukkit.getConsoleSender().sendMessage(String.format("%sWTF, DATABASE DIDNT CONNECT", Config.ERROR_COLOR));
 			throw new RuntimeException(e);
 		}
 	}
