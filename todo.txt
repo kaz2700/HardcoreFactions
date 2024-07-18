@@ -13,6 +13,7 @@ allies
 constructor that takes map stirng objcect and desierializes everyting
 activate and deactivate colors in config
 only leader can disband (commented out bcz of testing)
+on f disband delelte faction from databse
 
 ideas:
 mundial of factions

@@ -49,11 +49,11 @@ public class Claim {
 
 	public String serialize() {
 		return String.format("""
-					{
-						"pos1": "%s",
-						"pos2": "%s"
-					}
-				""", new Gson().toJson(getPos1().serialize()), new Gson().toJson(getPos2().serialize()));
+				    {
+				        "pos1": "%s",
+				        "pos2": "%s"
+				    }
+				""", getPos1().serialize(), getPos2().serialize());
 	}
 
 	public static Claim deserialize(String serializedJson) {
