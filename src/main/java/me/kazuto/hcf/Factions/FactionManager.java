@@ -64,9 +64,25 @@ public class FactionManager {
 		return null;
 	}
 
-	public void deleteFaction(Faction faction) {
+	public void deleteFaction(PlayerFaction faction) {
 		assert (factions.contains(faction));
 		factions.remove(faction);
+		try {
+			String updatePlayersSql = "UPDATE players SET factionId = NULL WHERE factionId = '" + faction.getUuid()
+					+ "'";
+			PreparedStatement updatePlayersStmt = DataBase.getInstance().getConnection()
+					.prepareStatement(updatePlayersSql);
+			updatePlayersStmt.executeUpdate();
+			updatePlayersStmt.close();
+
+			String sql = "DELETE FROM factions WHERE uuid = '" + faction.getUuid() + "'";
+			PreparedStatement preparedStatement = DataBase.getInstance().getConnection().prepareStatement(sql);
+			preparedStatement.executeUpdate();
+			Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "faction delete");
+			preparedStatement.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public PlayerFaction getFactionFromName(String name) {

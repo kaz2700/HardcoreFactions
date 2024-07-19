@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
 import lombok.Setter;
+import me.kazuto.hcf.Config;
 import me.kazuto.hcf.Database.DataBase;
 import me.kazuto.hcf.Factions.Claim.Claim;
 import me.kazuto.hcf.Factions.Faction;
@@ -128,15 +129,86 @@ public class PlayerFaction extends Faction {
 
 	@Override
 	public String getInfo() {
-		StringBuilder listOfPlayerNames = new StringBuilder();
-		for (FactionPlayer factionPlayer : getPlayers()) {
-			ChatColor color = ChatColor.GRAY;
-			if (factionPlayer.getOfflinePlayer().isOnline()) {
-				color = ChatColor.GREEN;
+		StringBuilder builder = new StringBuilder();
+
+		// builder.append(Config.PRIMARY_COLOR + "Home: " + "\n");
+		// builder.append(Config.PRIMARY_COLOR + "Allies: " + "\n");
+		builder.append(String.format("%sLeader: %s%s%s[%s%s%s]\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR,
+				Bukkit.getOfflinePlayer(getLeader().getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+				getLeader().getKills(), ChatColor.GRAY));
+
+		if (!getCaptains().isEmpty()) {// todo never print this?
+			StringBuilder coleaders = new StringBuilder();
+			coleaders.append(String.format("%sColeaders: ", Config.PRIMARY_COLOR));
+			int i = 1;
+			for (FactionPlayer factionPlayer : getPlayers()) {
+				if (i == getPlayers().size())
+					coleaders.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+				else {
+					coleaders.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+					i++;
+				}
 			}
-			listOfPlayerNames.append(color).append(" ").append(factionPlayer.getName());
 		}
-		return String.format("Faction: %s\nPlayers: %s\nBalance: %s", getName(), listOfPlayerNames, getBalance());
+
+		if (!getCaptains().isEmpty()) {
+			StringBuilder captains = new StringBuilder();
+			captains.append(String.format("%sCaptians: ", Config.PRIMARY_COLOR));
+			int i = 1;
+			for (FactionPlayer factionPlayer : getPlayers()) {
+				if (i == getPlayers().size())
+					captains.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+				else {
+					captains.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+					i++;
+				}
+			}
+		}
+
+		if (!getPlayers().isEmpty()) {
+			StringBuilder members = new StringBuilder();
+			members.append(String.format("%sMembers: ", Config.PRIMARY_COLOR));
+			int i = 1;
+			for (FactionPlayer factionPlayer : getPlayers()) {
+				if (i == getPlayers().size())
+					members.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+				else {
+					members.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+					i++;
+				}
+			}
+		}
+
+		if (getAnnouncement() != null)
+			builder.append(String.format("%sAnnouncement: %s%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR,
+					getAnnouncement()));
+
+		builder.append(String.format("%sBalance: %s$%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, getBalance()));
+		/*
+		 * if(getDTR() > 0) builder.append(String.format("%sDTR: %s%.1f\n",
+		 * Config.PRIMARY_COLOR, Config.SUCCESS_COLOR, getDTR())); else
+		 * builder.append(String.format("%sDTR: %s%.1f\n", Config.PRIMARY_COLOR,
+		 * Config.ERROR_COLOR, getDTR())); if(getTimeUntilRegenMillis() > 0) { int
+		 * DTRRegenMinutes = ((int) getTimeUntilRegenMillis() / 1000) / 60; int
+		 * DTRRegenSeconds = ((int) getTimeUntilRegenMillis() / 1000) % 60;
+		 * builder.append(String.format("%sDTR Freeze Time: %s%sm %ss\n",
+		 * Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, DTRRegenMinutes,
+		 * DTRRegenSeconds)); //todo put dtr regen time }
+		 * 
+		 */
+		return builder.toString();
 	}
 
 	public List<FactionPlayer> getOnlinePlayers() {

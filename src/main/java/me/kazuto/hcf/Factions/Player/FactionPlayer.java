@@ -24,6 +24,10 @@ public class FactionPlayer {
 
 	@Getter
 	@Setter
+	private int kills;
+
+	@Getter
+	@Setter
 	private int balance;
 
 	@Getter

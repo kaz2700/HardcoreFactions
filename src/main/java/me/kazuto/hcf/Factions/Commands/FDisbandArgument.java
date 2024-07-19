@@ -43,7 +43,7 @@ public class FDisbandArgument extends CommandArgument {
 		if (playerFaction.getLeader() != factionPlayer) {
 			player.sendMessage(String.format("%s%sYou must be the faction leader to disband the faction.",
 					Config.ERROR_COLOR, Config.ERROR_PREFIX));
-			return false;
+			// return false;
 		}
 		player.sendMessage(String.format("%sYou disbanded %s.", Config.SUCCESS_COLOR, playerFaction.getName()));
 		FactionManager.getInstance().deleteFaction(playerFaction);
