@@ -7,27 +7,20 @@ import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Factions.Utils.CommandArgument;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FDisbandArgument extends CommandArgument {
-
-	public FDisbandArgument() {
-		super("disband", "Disband your faction.", "/f disband");
+public class FSetHomeArgument extends CommandArgument {
+	public FSetHomeArgument() {
+		super("sethome", "Set the faction home to your current position.", "/f sethome");
 	}
 
-	@Override
 	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
 		if (!(commandSender instanceof Player player)) {
-			commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction to disband.",
+			commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction!",
 					Config.ERROR_COLOR, Config.ERROR_PREFIX));
-			return false;
-		}
-
-		if (strings.length != 1) {
-			player.sendMessage(
-					String.format("%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
 			return false;
 		}
 
@@ -38,15 +31,23 @@ public class FDisbandArgument extends CommandArgument {
 			return false;
 		}
 
-		PlayerFaction playerFaction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
+		PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
 
-		if (playerFaction.getLeader() != factionPlayer) {
-			player.sendMessage(String.format("%s%sYou must be the faction leader to disband the faction.",
-					Config.ERROR_COLOR, Config.ERROR_PREFIX));
+		if (faction.getLeader() != factionPlayer) {
+			player.sendMessage(String.format("%s%sYou are not the leader of the faction.", Config.ERROR_COLOR,
+					Config.ERROR_PREFIX));
 			return false;
 		}
-		player.sendMessage(String.format("%sYou disbanded %s.", Config.SUCCESS_COLOR, playerFaction.getName()));
-		FactionManager.getInstance().deleteFaction(playerFaction);
+
+		Location playerLocation = player.getLocation();
+
+		if (FactionManager.getInstance().getFactionFromLocation(playerLocation) != faction) {
+			player.sendMessage(String.format("%sYou must set the faction home inside it's claim", Config.ERROR_COLOR));
+			return false;
+		}
+
+		faction.broadcastMessage(String.format("%sYour faction home has been updated.", Config.WARNING_COLOR));
+		faction.getClaim().setHome(playerLocation);
 		return true;
 	}
 }

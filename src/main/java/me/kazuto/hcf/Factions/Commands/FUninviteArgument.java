@@ -41,6 +41,12 @@ public class FUninviteArgument extends CommandArgument {
 
 		PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
 
+		if (faction.getLeader() != factionPlayer) {
+			player.sendMessage(String.format("%s%sYou must be the leader of the faction.", Config.ERROR_COLOR,
+					Config.ERROR_PREFIX));
+			return false;
+		}
+
 		if (!faction.getInvitedPlayers().contains(uninvitedFactionPlayer)) {
 			player.sendMessage(String.format("%s%s%s is not invited to the faction.", Config.ERROR_COLOR,
 					Config.ERROR_PREFIX, uninvitedFactionPlayer.getName()));

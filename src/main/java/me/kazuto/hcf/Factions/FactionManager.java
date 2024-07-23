@@ -137,7 +137,6 @@ public class FactionManager {
 			while (result.next()) {
 				factions.add(PlayerFaction.getPlayerFactionFromDataBase(result));
 			}
-			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "testing factions");
 			preparedStatement.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

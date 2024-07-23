@@ -7,27 +7,20 @@ import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Factions.Utils.CommandArgument;
+import me.kazuto.hcf.Timers.TimerManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FDisbandArgument extends CommandArgument {
-
-	public FDisbandArgument() {
-		super("disband", "Disband your faction.", "/f disband");
+public class FHomeArgument extends CommandArgument {
+	public FHomeArgument() {
+		super("home", "Teleport to your faction home.", "/f home");
 	}
 
-	@Override
 	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
 		if (!(commandSender instanceof Player player)) {
-			commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction to disband.",
+			commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction!",
 					Config.ERROR_COLOR, Config.ERROR_PREFIX));
-			return false;
-		}
-
-		if (strings.length != 1) {
-			player.sendMessage(
-					String.format("%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
 			return false;
 		}
 
@@ -38,15 +31,22 @@ public class FDisbandArgument extends CommandArgument {
 			return false;
 		}
 
-		PlayerFaction playerFaction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
+		PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
 
-		if (playerFaction.getLeader() != factionPlayer) {
-			player.sendMessage(String.format("%s%sYou must be the faction leader to disband the faction.",
-					Config.ERROR_COLOR, Config.ERROR_PREFIX));
+		if (faction.getClaim() == null || faction.getClaim().getHome() == null) {
+			player.sendMessage(String.format("%sYour faction doesn't have a home set.", Config.ERROR_COLOR));
 			return false;
 		}
-		player.sendMessage(String.format("%sYou disbanded %s.", Config.SUCCESS_COLOR, playerFaction.getName()));
-		FactionManager.getInstance().deleteFaction(playerFaction);
+
+		if (TimerManager.getInstance().isActive(factionPlayer.getPvpTimer())) {
+			player.sendMessage(String.format("%sYou cannot teleport while on combat.", Config.ERROR_COLOR));
+			return false;
+		}
+		// check if is in safe zone
+
+		TimerManager.getInstance().addTimer(factionPlayer.getFHomeTimer());
+		player.sendMessage(
+				String.format("%sDon't move for 10 seconds to get teleported to the faction home.", Config.INFO_COLOR));
 		return true;
 	}
 }

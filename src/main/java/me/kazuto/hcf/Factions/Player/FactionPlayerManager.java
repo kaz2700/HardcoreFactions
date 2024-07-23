@@ -58,7 +58,6 @@ public class FactionPlayerManager {
 			while (result.next()) {
 				players.add(FactionPlayer.getFactionPlayerFromDataBase(result));
 			}
-			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "testing players");
 			preparedStatement.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

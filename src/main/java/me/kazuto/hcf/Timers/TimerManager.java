@@ -6,9 +6,9 @@ import lombok.Getter;
 import me.kazuto.hcf.Main;
 import org.bukkit.Bukkit;
 
+@Getter
 public class TimerManager {
 
-	@Getter
 	private HashMap<Timer, Double> timers = new HashMap<>();
 
 	private TimerManager() {
@@ -23,11 +23,16 @@ public class TimerManager {
 		timers.forEach((timer, time) -> {
 			timers.put(timer, time - 0.1);
 			if (timers.get(timer) <= 0) {
-				if (timer.getEndTask() != null)
-					Bukkit.getScheduler().runTask(Main.getInstance(), timer.getEndTask());
-				timers.remove(timer);
+				if (timer.hasEndTask())
+					timer.runEndTask();
+				cancelTimer(timer);
 			}
 		});
+	}
+
+	public void cancelTimer(Timer timer) {
+		assert (timers.containsKey(timer));
+		timers.remove(timer);
 	}
 
 	public boolean isActive(Timer timer) {

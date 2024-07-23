@@ -14,57 +14,46 @@ import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Timers.Timer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
+@Getter
 public class FactionPlayer {
-	@Getter
 	@Setter
 	private UUID uuid;
 
-	@Getter
 	@Setter
 	private int kills;
 
-	@Getter
 	@Setter
-	private int balance;
+	private int balance = Config.INITIAL_BALANCE;
 
-	@Getter
 	@Setter
-	private Location preClaimPos1;
+	private Location preClaimPos1 = null;
 
-	@Getter
 	@Setter
-	private Location preClaimPos2;
+	private Location preClaimPos2 = null;
 
-	@Getter
-	private Timer pvpTimer;
+	private Timer pvpTimer = new Timer(30.0);;
+	private Timer fHomeTimer = new Timer(10.0, () -> {
+		// todo make sure it cant bug if player leaves on timer etc
+		Location factionHome = getFaction().getClaim().getHome();
+		Player player = Bukkit.getPlayer(getUuid());
+		player.teleport(factionHome);
+		player.sendMessage(String.format("%sYou have been teleported to your faction home.", Config.WARNING_COLOR));
+	});
+	private Timer pearlTimer = new Timer(16.0);
 
-	@Getter
 	@Setter
 	private Timer classWarmUp;
 
-	@Getter
 	@Setter
-	private boolean activeFMap;
+	private boolean activeFMap = false;
 
 	public FactionPlayer(UUID uuid) {
 		this.uuid = uuid;
-		this.setBalance(Config.INITIAL_BALANCE);
-		preClaimPos1 = null;
-		preClaimPos2 = null;
-		this.pvpTimer = new Timer(30.0);
-		this.activeFMap = false;
-	}
-
-	public FactionPlayer(UUID uuid, int balance) {
-		this.uuid = uuid;
-		this.setBalance(balance);
-		preClaimPos1 = null;
-		preClaimPos2 = null;
-		this.pvpTimer = new Timer(30.0);
-		this.activeFMap = false;
 	}
 
 	public OfflinePlayer getOfflinePlayer() {
@@ -108,7 +97,7 @@ public class FactionPlayer {
 
 			int factionRank;
 			if (faction != null && faction.getLeader() == this) {
-				factionRank = 2;
+				factionRank = 3;
 			} else {
 				factionRank = 0;
 			}
@@ -127,24 +116,18 @@ public class FactionPlayer {
 		int balance = row.getInt(row.findColumn("balance"));
 		UUID factionId = UUID.fromString(row.getString(row.findColumn("factionId")));
 		int factionRank = row.getInt(row.findColumn("factionRank"));
-		Bukkit.getConsoleSender().sendMessage("1");
 		FactionPlayer player = new FactionPlayer(uuid);
 
 		player.setBalance(balance);
 		loadPlayerToFaction(player, factionId, factionRank);
-		Bukkit.getConsoleSender().sendMessage(
-				"loaded player: " + Bukkit.getOfflinePlayer(row.getString(row.findColumn("uuid"))).getName());
 		return player;
 	}
 
 	public static void loadPlayerToFaction(FactionPlayer player, UUID factionId, int factionRank) {
 		for (PlayerFaction faction : FactionManager.getInstance().getPlayerFactions()) {
-			Bukkit.getConsoleSender().sendMessage("not equals");
 			if (!faction.getUuid().toString().equals(factionId.toString()))
 				continue;
-			Bukkit.getConsoleSender().sendMessage("equals");
 			faction.addPlayer(player);
-			Bukkit.getConsoleSender().sendMessage("added");
 
 			switch (factionRank) {
 				case 3 :

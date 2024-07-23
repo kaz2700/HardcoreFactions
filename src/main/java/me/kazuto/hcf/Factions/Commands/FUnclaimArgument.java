@@ -11,23 +11,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FDisbandArgument extends CommandArgument {
-
-	public FDisbandArgument() {
-		super("disband", "Disband your faction.", "/f disband");
+public class FUnclaimArgument extends CommandArgument {
+	public FUnclaimArgument() {
+		super("unclaim", "Unclaim the faction land.", "/f unclaim");
 	}
 
 	@Override
 	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
 		if (!(commandSender instanceof Player player)) {
-			commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction to disband.",
+			commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction!",
 					Config.ERROR_COLOR, Config.ERROR_PREFIX));
-			return false;
-		}
-
-		if (strings.length != 1) {
-			player.sendMessage(
-					String.format("%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
 			return false;
 		}
 
@@ -38,15 +31,16 @@ public class FDisbandArgument extends CommandArgument {
 			return false;
 		}
 
-		PlayerFaction playerFaction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
+		PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
 
-		if (playerFaction.getLeader() != factionPlayer) {
-			player.sendMessage(String.format("%s%sYou must be the faction leader to disband the faction.",
-					Config.ERROR_COLOR, Config.ERROR_PREFIX));
+		if (faction.getLeader() != factionPlayer) {
+			player.sendMessage(String.format("%s%sYou must be the leader of the faction.", Config.ERROR_COLOR,
+					Config.ERROR_PREFIX));
 			return false;
 		}
-		player.sendMessage(String.format("%sYou disbanded %s.", Config.SUCCESS_COLOR, playerFaction.getName()));
-		FactionManager.getInstance().deleteFaction(playerFaction);
+		faction.broadcastMessage(
+				String.format("%s%s has unclaimed the faction land.", Config.INFO_COLOR, factionPlayer.getName()));
+		faction.setClaim(null);
 		return true;
 	}
 }

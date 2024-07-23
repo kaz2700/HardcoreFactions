@@ -8,6 +8,8 @@ import me.kazuto.hcf.Factions.FactionManager;
 import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +22,7 @@ import org.bukkit.inventory.EquipmentSlot;
 public class ClaimListener implements Listener {
 
 	@EventHandler
-	public void playerMove(PlayerMoveEvent event) {
+	public void onMove(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
 		Faction factionFrom = FactionManager.getInstance().getFactionFromLocation(event.getFrom());
 		Faction factionTo = FactionManager.getInstance().getFactionFromLocation(event.getTo());
@@ -32,13 +34,15 @@ public class ClaimListener implements Listener {
 		}
 
 		if (factionFrom != factionTo) {
-			player.sendMessage(String.format("%sLeaving %s.", Config.ERROR_COLOR, factionFrom.getName()));
+			player.sendActionBar(new TextComponent(String.format("%sNow in %s%s%s's territory.", Config.SECONDARY_COLOR,
+					Config.PRIMARY_COLOR, factionTo.getName(), Config.SECONDARY_COLOR)));
 			player.sendMessage(String.format("%sEntering %s.", Config.SUCCESS_COLOR, factionTo.getName()));
+			player.sendMessage(String.format("%sLeaving %s.", Config.WARNING_COLOR, factionFrom.getName()));
 		}
 	}
 
 	@EventHandler
-	public void onClickEvent(PlayerInteractEvent event) {
+	public void onClick(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
 

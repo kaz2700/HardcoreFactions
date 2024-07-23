@@ -80,8 +80,6 @@ public class PlayerFaction extends Faction {
 		faction.setName(name);
 		faction.setClaim(claim);
 
-		Bukkit.getConsoleSender().sendMessage("loaded facion: " + row.getString(row.findColumn("name")));
-
 		return faction;
 	}
 
@@ -130,9 +128,12 @@ public class PlayerFaction extends Faction {
 	@Override
 	public String getInfo() {
 		StringBuilder builder = new StringBuilder();
-
-		// builder.append(Config.PRIMARY_COLOR + "Home: " + "\n");
-		// builder.append(Config.PRIMARY_COLOR + "Allies: " + "\n");
+		Claim claim = getClaim();
+		builder.append(String.format("%sHome: %s%s\n", Config.PRIMARY_COLOR, Config.INFO_COLOR,
+				claim != null && claim.getHome() != null
+						? claim.getHome().getBlockX() + ", " + claim.getHome().getBlockZ()
+						: "none"));
+		builder.append(Config.PRIMARY_COLOR + "Allies: " + "\n");
 		builder.append(String.format("%sLeader: %s%s%s[%s%s%s]\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR,
 				Bukkit.getOfflinePlayer(getLeader().getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
 				getLeader().getKills(), ChatColor.GRAY));
@@ -196,6 +197,7 @@ public class PlayerFaction extends Faction {
 					getAnnouncement()));
 
 		builder.append(String.format("%sBalance: %s$%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, getBalance()));
+		builder.append(String.format("%sDTR: %s$%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, getDtr()));
 		/*
 		 * if(getDTR() > 0) builder.append(String.format("%sDTR: %s%.1f\n",
 		 * Config.PRIMARY_COLOR, Config.SUCCESS_COLOR, getDTR())); else
@@ -206,7 +208,7 @@ public class PlayerFaction extends Faction {
 		 * builder.append(String.format("%sDTR Freeze Time: %s%sm %ss\n",
 		 * Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, DTRRegenMinutes,
 		 * DTRRegenSeconds)); //todo put dtr regen time }
-		 * 
+		 *
 		 */
 		return builder.toString();
 	}
@@ -246,7 +248,6 @@ public class PlayerFaction extends Faction {
 			preparedStatement.setString(7, claim != null ? claim.serialize() : null);
 
 			preparedStatement.executeUpdate();
-
 			preparedStatement.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

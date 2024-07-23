@@ -2,30 +2,31 @@
 package me.kazuto.hcf.Factions.Claim;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.jetbrains.annotations.NotNull;
 
+@Setter
+@Getter
 public class Claim {
-	@Getter
-	@Setter
 	Location pos1;
-	@Getter
-	@Setter
 	Location pos2;
+	Location home;
 
 	public Claim(Location pos1, Location pos2) {
 		this.pos1 = pos1;
 		this.pos2 = pos2;
+	}
+
+	public Claim(Location pos1, Location pos2, Location home) {
+		this.pos1 = pos1;
+		this.pos2 = pos2;
+		this.home = home;
 	}
 
 	public ArrayList<Location> getCorners() {
@@ -37,7 +38,7 @@ public class Claim {
 		Location pos3 = new Location(world, pos1.getBlockX(), 0, pos2.getBlockZ());
 		Location pos4 = new Location(world, pos2.getBlockX(), 0, pos1.getBlockZ());
 
-		ArrayList<Location> claimCorners = new ArrayList<Location>();
+		ArrayList<Location> claimCorners = new ArrayList<>();
 
 		claimCorners.add(pos1);
 		claimCorners.add(pos2);
@@ -48,12 +49,17 @@ public class Claim {
 	}
 
 	public String serialize() {
+		String homeString = null;
+		if (getHome() != null)
+			homeString = getHome().serialize().toString();
+
 		return String.format("""
 				    {
 				        "pos1": "%s",
-				        "pos2": "%s"
+				        "pos2": "%s",
+				        "home": "%s"
 				    }
-				""", getPos1().serialize(), getPos2().serialize());
+				""", getPos1().serialize(), getPos2().serialize(), homeString);
 	}
 
 	public static Claim deserialize(String serializedJson) {
@@ -68,6 +74,10 @@ public class Claim {
 		Location pos2 = Location.deserialize(new Gson().fromJson(pos2Json, new TypeToken<Map<String, String>>() {
 		}.getType()));
 
-		return new Claim(pos1, pos2);
+		String homeJson = mapClaim.get("home");
+		Location home = Location.deserialize(new Gson().fromJson(homeJson, new TypeToken<Map<String, String>>() {
+		}.getType()));
+
+		return new Claim(pos1, pos2, home);
 	}
 }
