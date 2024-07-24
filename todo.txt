@@ -15,6 +15,7 @@ activate and deactivate colors in config
 only leader can disband (commented out bcz of testing)
 on f disband delelte faction from databse
 cancel f home on move and hit
+if /f then show help
 
 ideas:
 mundial of factions

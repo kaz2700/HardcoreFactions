@@ -95,13 +95,23 @@ public class PlayerFaction extends Faction {
 		addPlayer(leader);
 	}
 
+	public void addColeader(FactionPlayer factionPlayer) {
+		assert (!coleaders.contains(factionPlayer));
+		coleaders.add(factionPlayer);
+	}
+
+	public void removeColeader(FactionPlayer factionPlayer) {
+		assert (coleaders.contains(factionPlayer));
+		coleaders.remove(factionPlayer);
+	}
+
 	public void addCaptain(FactionPlayer factionPlayer) {
 		assert (!captains.contains(factionPlayer));
 		captains.add(factionPlayer);
 	}
 
 	public void removeCaptain(FactionPlayer factionPlayer) {
-		assert (!captains.contains(factionPlayer));
+		assert (captains.contains(factionPlayer));
 		captains.remove(factionPlayer);
 	}
 
@@ -118,10 +128,13 @@ public class PlayerFaction extends Faction {
 	public void addPlayer(FactionPlayer factionPlayer) {
 		assert (!players.contains(factionPlayer));
 		players.add(factionPlayer);
+		this.dtr = calculeDtr();
 	}
 
 	public void removePlayer(FactionPlayer factionPlayer) {
 		assert (players.contains(factionPlayer));
+		coleaders.remove(factionPlayer);
+		captains.remove(factionPlayer);
 		players.remove(factionPlayer);
 	}
 
@@ -197,7 +210,7 @@ public class PlayerFaction extends Faction {
 					getAnnouncement()));
 
 		builder.append(String.format("%sBalance: %s$%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, getBalance()));
-		builder.append(String.format("%sDTR: %s$%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, getDtr()));
+		builder.append(String.format("%sDTR: %s%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, getDtr()));
 		/*
 		 * if(getDTR() > 0) builder.append(String.format("%sDTR: %s%.1f\n",
 		 * Config.PRIMARY_COLOR, Config.SUCCESS_COLOR, getDTR())); else
@@ -219,6 +232,21 @@ public class PlayerFaction extends Faction {
 
 	public boolean isOnline() {
 		return !getOnlinePlayers().isEmpty();
+	}
+
+	public float calculeDtr() {
+		switch (players.size()) {
+			case 1 :
+				return 1.1f;
+			case 2 :
+				return 1.8f;
+			case 3 :
+				return 2.5f;
+			case 4 :
+				return 3.2f;
+			default :
+				return 3.9f;
+		}
 	}
 
 	public void broadcastMessage(String message) {

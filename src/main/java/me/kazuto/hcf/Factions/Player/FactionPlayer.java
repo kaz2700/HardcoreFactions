@@ -95,14 +95,18 @@ public class FactionPlayer {
 			}
 			preparedStatement.setObject(3, factionId);
 
-			int factionRank;
-			if (faction != null && faction.getLeader() == this) {
-				factionRank = 3;
-			} else {
-				factionRank = 0;
+			String factionRank = "member";
+			if (faction != null) {
+				if (faction.getLeader() == this) {
+					factionRank = "leader";
+				} else if (faction.getColeaders().contains(this)) {
+					factionRank = "coleader";
+				} else if (faction.getCaptains().contains(this)) {
+					factionRank = "captain";
+				}
 			}
 
-			preparedStatement.setInt(4, factionRank);
+			preparedStatement.setString(4, factionRank);
 
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -115,7 +119,7 @@ public class FactionPlayer {
 		UUID uuid = UUID.fromString(row.getString(row.findColumn("uuid")));
 		int balance = row.getInt(row.findColumn("balance"));
 		UUID factionId = UUID.fromString(row.getString(row.findColumn("factionId")));
-		int factionRank = row.getInt(row.findColumn("factionRank"));
+		String factionRank = row.getString(row.findColumn("factionRank"));
 		FactionPlayer player = new FactionPlayer(uuid);
 
 		player.setBalance(balance);
@@ -123,19 +127,22 @@ public class FactionPlayer {
 		return player;
 	}
 
-	public static void loadPlayerToFaction(FactionPlayer player, UUID factionId, int factionRank) {
+	public static void loadPlayerToFaction(FactionPlayer player, UUID factionId, String factionRank) {
 		for (PlayerFaction faction : FactionManager.getInstance().getPlayerFactions()) {
 			if (!faction.getUuid().toString().equals(factionId.toString()))
 				continue;
+
 			faction.addPlayer(player);
 
 			switch (factionRank) {
-				case 3 :
+				case "leader" :
 					faction.setLeader(player);
 					break;
-				case 2 : // todo set coleader
+				case "coleader" : // todo set coleader
+					faction.addColeader(player);
 					break;
-				case 1 : // todo set captain
+				case "captain" : // todo set captain
+					faction.addCaptain(player);
 					break;
 			}
 		}
