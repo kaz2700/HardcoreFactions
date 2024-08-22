@@ -46,22 +46,25 @@ public class Main extends JavaPlugin implements Listener {
 		setWorldBorder();
 
 		loadData();
-		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Hardcore Factions Plugin Enabled.");
+		getServer().getConsoleSender()
+				.sendMessage(String.format("%s%sHardcore Factions Plugin Enabled.", Config.SUCCESS_COLOR, Config.BOLD));
 	}
 
 	public void onDisable() {
 		saveData();
-		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Hardcore Factions Plugin Disabled.");
+		getServer().getConsoleSender().sendMessage(
+				String.format("%s%sHardcore Factions Plugin Disabled.", Config.SUCCESS_COLOR, Config.BOLD));
 	}
 
 	public void registerEvents() {
 		PluginManager pluginManager = Bukkit.getPluginManager();
 
 		pluginManager.registerEvents(new CancelFHomeEvents(), this);
-		pluginManager.registerEvents(new ChatEvent(), this);
+		pluginManager.registerEvents(new ChatFormatEvent(), this);
 		pluginManager.registerEvents(new CreateFactionPlayerOnJoinEvent(), this);
+		pluginManager.registerEvents(new EnderPearlEvent(), this);
 		pluginManager.registerEvents(new KillEvent(), this);
-		pluginManager.registerEvents(new PlayerHitEnemyEvent(), this);
+		pluginManager.registerEvents(new AddPvpTimerEvent(), this);
 		pluginManager.registerEvents(new PlayerHitTeamEvent(), this);
 
 		pluginManager.registerEvents(new KitActivateListener(), this);

@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="15fc85cb-44e0-4abd-b88a-a1533666a166" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FactionExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FactionExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Player/FactionPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Player/FactionPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/PlayerFaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Types/PlayerFaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/ChatEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/ChatFormatEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/KillEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/KillEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/PlayerHitEnemyEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Events/AddPvpTimerEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FDisbandArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FDisbandArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FInviteArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FInviteArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FJoinArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FJoinArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FLeaveArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Factions/Commands/FLeaveArgument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kazuto/hcf/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,11 +239,11 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Gradle.HCF [build]" />
       <item itemvalue="Gradle.HardcoreFactions [jar]" />
       <item itemvalue="Gradle.HardcoreFactions [spotlessApply]" />
       <item itemvalue="Gradle.HardcoreFactions [spotlessCheck]" />
       <item itemvalue="Gradle.HardcoreFactions [spotlessInternalRegisterDependencies]" />
-      <item itemvalue="Gradle.HCF [build]" />
       <item itemvalue="JAR Application.Unnamed" />
       <item itemvalue="Remote JVM Debug.Debug spigot" />
     </list>

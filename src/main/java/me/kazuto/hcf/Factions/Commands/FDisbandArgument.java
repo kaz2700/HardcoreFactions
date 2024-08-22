@@ -45,7 +45,8 @@ public class FDisbandArgument extends CommandArgument {
 					Config.ERROR_COLOR, Config.ERROR_PREFIX));
 			return false;
 		}
-		player.sendMessage(String.format("%sYou disbanded %s.", Config.SUCCESS_COLOR, playerFaction.getName()));
+		playerFaction.broadcastMessage(String.format("%s%s was disbanded by %s.", Config.SUCCESS_COLOR,
+				playerFaction.getName(), factionPlayer.getName()));
 		FactionManager.getInstance().deleteFaction(playerFaction);
 		return true;
 	}

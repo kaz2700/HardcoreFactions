@@ -13,7 +13,7 @@ public class KillEvent implements Listener {
 
 	@EventHandler
 	public void onKill(PlayerDeathEvent event) {
-		Bukkit.broadcastMessage("maybe error in killevent");
+		Bukkit.broadcastMessage("Maybe error in killevent?");
 		FactionPlayer factionPlayer = FactionPlayerManager.getInstance()
 				.getPlayerFromUUID(event.getEntity().getUniqueId());
 		factionPlayer.setKills(factionPlayer.getKills() + 1);
