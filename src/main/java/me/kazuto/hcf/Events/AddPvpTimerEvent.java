@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class PlayerHitEnemyEvent implements Listener {
+public class AddPvpTimerEvent implements Listener {
 	FactionPlayerManager factionPlayerManager = FactionPlayerManager.getInstance();
 	TimerManager timerManager = TimerManager.getInstance();
 	@EventHandler

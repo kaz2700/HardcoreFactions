@@ -50,6 +50,7 @@ public class FLeaveArgument extends CommandArgument {
 
 		faction.removePlayer(leavingPlayer);
 		faction.broadcastMessage(String.format("%s%s left the faction.", Config.ERROR_COLOR, leavingPlayer.getName()));
+		player.sendMessage(String.format("%sYou left %s", Config.SUCCESS_COLOR, faction.getName()));
 		return true;
 	}
 }

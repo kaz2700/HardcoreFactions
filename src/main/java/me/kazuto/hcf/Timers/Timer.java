@@ -2,6 +2,8 @@
 package me.kazuto.hcf.Timers;
 
 import lombok.Getter;
+import me.kazuto.hcf.Main;
+import org.bukkit.Bukkit;
 
 public class Timer {
 	@Getter
@@ -17,5 +19,13 @@ public class Timer {
 	public Timer(Double maxTime, Runnable endTask) {
 		this.maxTime = maxTime;
 		this.endTask = endTask;
+	}
+
+	public boolean hasEndTask() {
+		return getEndTask() != null;
+	}
+
+	public void runEndTask() {
+		Bukkit.getScheduler().runTask(Main.getInstance(), getEndTask());
 	}
 }

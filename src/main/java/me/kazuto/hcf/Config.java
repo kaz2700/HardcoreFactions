@@ -54,6 +54,7 @@ public class Config {
 
 	public static final World WORLD_OVERWORLD = Bukkit.getWorlds().get(0);
 
-	public static final int MAX_RENDER_DISTANCE_BLOCKS = 64;
 	public static final int RELOAD_CLAIM_PILLARS_TICKS = 60;
+
+	public static final int SAVE_DATA_TICKS = 600;
 }

@@ -2,11 +2,15 @@
 package me.kazuto.hcf.Factions.Types;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
 import lombok.Setter;
+import me.kazuto.hcf.Config;
 import me.kazuto.hcf.Database.DataBase;
 import me.kazuto.hcf.Factions.Claim.Claim;
 import me.kazuto.hcf.Factions.Faction;
@@ -30,7 +34,8 @@ public class PlayerFaction extends Faction {
 	private ArrayList<FactionPlayer> invitedPlayers = new ArrayList<>();
 
 	@Getter
-	private final UUID uuid;
+	@Setter
+	private UUID uuid;
 	@Getter
 	@Setter
 	int balance;
@@ -43,13 +48,45 @@ public class PlayerFaction extends Faction {
 	@Setter
 	String announcement;
 
-	@Getter
 	@Setter
+	@Getter
 	FactionPlayer leader;
 
 	@Getter
 	@Setter
 	boolean isOpen;
+
+	public static PlayerFaction getPlayerFactionFromDataBase(ResultSet row) throws SQLException {
+		UUID uuid = UUID.fromString(row.getString(row.findColumn("uuid")));
+		int balance = row.getInt(row.findColumn("balance"));
+		float dtr = row.getFloat(row.findColumn("dtr"));
+		String announcement = row.getString(row.findColumn("announcement"));
+		boolean isOpen = row.getBoolean(row.findColumn("isOpen"));
+		String name = row.getString(row.findColumn("name"));
+
+		PlayerFaction faction = new PlayerFaction(name);
+
+		Claim claim = null;
+		String claimString = row.getString(row.findColumn("claim"));
+		if (claimString != null) {
+			claim = Claim.deserialize(claimString);
+		}
+
+		faction.setUuid(uuid);
+		faction.setBalance(balance);
+		faction.setDtr(dtr);
+		faction.setAnnouncement(announcement);
+		faction.setOpen(isOpen);
+		faction.setName(name);
+		faction.setClaim(claim);
+
+		return faction;
+	}
+
+	public PlayerFaction(String name) {
+		super(name, 1);
+		this.uuid = UUID.randomUUID();
+	}
 
 	public PlayerFaction(String name, FactionPlayer leader) {
 		super(name, 1);
@@ -58,13 +95,23 @@ public class PlayerFaction extends Faction {
 		addPlayer(leader);
 	}
 
+	public void addColeader(FactionPlayer factionPlayer) {
+		assert (!coleaders.contains(factionPlayer));
+		coleaders.add(factionPlayer);
+	}
+
+	public void removeColeader(FactionPlayer factionPlayer) {
+		assert (coleaders.contains(factionPlayer));
+		coleaders.remove(factionPlayer);
+	}
+
 	public void addCaptain(FactionPlayer factionPlayer) {
 		assert (!captains.contains(factionPlayer));
 		captains.add(factionPlayer);
 	}
 
 	public void removeCaptain(FactionPlayer factionPlayer) {
-		assert (!captains.contains(factionPlayer));
+		assert (captains.contains(factionPlayer));
 		captains.remove(factionPlayer);
 	}
 
@@ -81,24 +128,102 @@ public class PlayerFaction extends Faction {
 	public void addPlayer(FactionPlayer factionPlayer) {
 		assert (!players.contains(factionPlayer));
 		players.add(factionPlayer);
+		this.dtr = calculeDtr();
 	}
 
 	public void removePlayer(FactionPlayer factionPlayer) {
 		assert (players.contains(factionPlayer));
+		coleaders.remove(factionPlayer);
+		captains.remove(factionPlayer);
 		players.remove(factionPlayer);
 	}
 
 	@Override
 	public String getInfo() {
-		StringBuilder listOfPlayerNames = new StringBuilder();
-		for (FactionPlayer factionPlayer : getPlayers()) {
-			ChatColor color = ChatColor.GRAY;
-			if (factionPlayer.getOfflinePlayer().isOnline()) {
-				color = ChatColor.GREEN;
+		StringBuilder builder = new StringBuilder();
+		Claim claim = getClaim();
+		builder.append(String.format("%sHome: %s%s\n", Config.PRIMARY_COLOR, Config.INFO_COLOR,
+				claim != null && claim.getHome() != null
+						? claim.getHome().getBlockX() + ", " + claim.getHome().getBlockZ()
+						: "none"));
+		builder.append(Config.PRIMARY_COLOR + "Allies: " + "\n");
+		builder.append(String.format("%sLeader: %s%s%s[%s%s%s]\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR,
+				Bukkit.getOfflinePlayer(getLeader().getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+				getLeader().getKills(), ChatColor.GRAY));
+
+		if (!getCaptains().isEmpty()) {// todo never print this?
+			StringBuilder coleaders = new StringBuilder();
+			coleaders.append(String.format("%sColeaders: ", Config.PRIMARY_COLOR));
+			int i = 1;
+			for (FactionPlayer factionPlayer : getPlayers()) {
+				if (i == getPlayers().size())
+					coleaders.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+				else {
+					coleaders.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+					i++;
+				}
 			}
-			listOfPlayerNames.append(color).append(" ").append(factionPlayer.getName());
 		}
-		return String.format("Faction: %s\nPlayers: %s\nBalance: %s", getName(), listOfPlayerNames, getBalance());
+
+		if (!getCaptains().isEmpty()) {
+			StringBuilder captains = new StringBuilder();
+			captains.append(String.format("%sCaptians: ", Config.PRIMARY_COLOR));
+			int i = 1;
+			for (FactionPlayer factionPlayer : getPlayers()) {
+				if (i == getPlayers().size())
+					captains.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+				else {
+					captains.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+					i++;
+				}
+			}
+		}
+
+		if (!getPlayers().isEmpty()) {
+			StringBuilder members = new StringBuilder();
+			members.append(String.format("%sMembers: ", Config.PRIMARY_COLOR));
+			int i = 1;
+			for (FactionPlayer factionPlayer : getPlayers()) {
+				if (i == getPlayers().size())
+					members.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+				else {
+					members.append(String.format("%s%s%s[%s%s%s]\n", Config.SECONDARY_COLOR,
+							Bukkit.getOfflinePlayer(factionPlayer.getUuid()).getName(), ChatColor.GRAY, ChatColor.GREEN,
+							factionPlayer.getKills(), ChatColor.GRAY));
+					i++;
+				}
+			}
+		}
+
+		if (getAnnouncement() != null)
+			builder.append(String.format("%sAnnouncement: %s%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR,
+					getAnnouncement()));
+
+		builder.append(String.format("%sBalance: %s$%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, getBalance()));
+		builder.append(String.format("%sDTR: %s%s\n", Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, getDtr()));
+		/*
+		 * if(getDTR() > 0) builder.append(String.format("%sDTR: %s%.1f\n",
+		 * Config.PRIMARY_COLOR, Config.SUCCESS_COLOR, getDTR())); else
+		 * builder.append(String.format("%sDTR: %s%.1f\n", Config.PRIMARY_COLOR,
+		 * Config.ERROR_COLOR, getDTR())); if(getTimeUntilRegenMillis() > 0) { int
+		 * DTRRegenMinutes = ((int) getTimeUntilRegenMillis() / 1000) / 60; int
+		 * DTRRegenSeconds = ((int) getTimeUntilRegenMillis() / 1000) % 60;
+		 * builder.append(String.format("%sDTR Freeze Time: %s%sm %ss\n",
+		 * Config.PRIMARY_COLOR, Config.SECONDARY_COLOR, DTRRegenMinutes,
+		 * DTRRegenSeconds)); //todo put dtr regen time }
+		 *
+		 */
+		return builder.toString();
 	}
 
 	public List<FactionPlayer> getOnlinePlayers() {
@@ -107,6 +232,21 @@ public class PlayerFaction extends Faction {
 
 	public boolean isOnline() {
 		return !getOnlinePlayers().isEmpty();
+	}
+
+	public float calculeDtr() {
+		switch (players.size()) {
+			case 1 :
+				return 1.1f;
+			case 2 :
+				return 1.8f;
+			case 3 :
+				return 2.5f;
+			case 4 :
+				return 3.2f;
+			default :
+				return 3.9f;
+		}
 	}
 
 	public void broadcastMessage(String message) {
@@ -133,10 +273,9 @@ public class PlayerFaction extends Faction {
 			preparedStatement.setBoolean(6, isOpen());
 
 			Claim claim = getClaim();
-			preparedStatement.setString(7, claim != null ? claim.serialize().toString() : null);
+			preparedStatement.setString(7, claim != null ? claim.serialize() : null);
 
 			preparedStatement.executeUpdate();
-
 			preparedStatement.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

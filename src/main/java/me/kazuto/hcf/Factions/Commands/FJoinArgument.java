@@ -60,7 +60,10 @@ public class FJoinArgument extends CommandArgument {
 			return false;
 		}
 
+		faction.uninvitePlayer(joiningPlayer);
 		faction.addPlayer(joiningPlayer);
+		faction.broadcastMessage(
+				String.format("%s%s has joined the faction.", Config.INFO_COLOR, joiningPlayer.getName()));
 		Bukkit.getServer().getPluginManager().callEvent(new FactionJoinEvent(player, faction));
 		return true;
 	}

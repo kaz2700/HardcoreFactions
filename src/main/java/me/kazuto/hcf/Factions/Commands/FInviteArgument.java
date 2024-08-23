@@ -7,6 +7,10 @@ import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import me.kazuto.hcf.Factions.Utils.CommandArgument;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -61,8 +65,10 @@ public class FInviteArgument extends CommandArgument {
 
 		if (invitedFactionPlayer.isOnline())
 			invitedFactionPlayer.getOfflinePlayer().getPlayer()
-					.sendMessage(String.format("%s%s has invited you to join %s.", Config.SUCCESS_COLOR,
-							factionPlayer.getName(), faction.getName()));
+					.sendMessage(String.format("%s%s has invited you to join %s %s.", Config.SUCCESS_COLOR,
+							factionPlayer.getName(), faction.getName(),
+							Component.text("click me").clickEvent(ClickEvent.runCommand("/test"))
+									.hoverEvent(HoverEvent.showText(Component.text("hi")))));
 		player.sendMessage(String.format("%s You invited %s to the faction", Config.SUCCESS_COLOR,
 				invitedFactionPlayer.getName()));
 		faction.invitePlayer(invitedFactionPlayer);

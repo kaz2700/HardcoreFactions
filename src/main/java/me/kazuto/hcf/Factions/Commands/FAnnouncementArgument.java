@@ -1,0 +1,60 @@
+/* (Copyright) 2024 github.com/kaz2700 */
+package me.kazuto.hcf.Factions.Commands;
+
+import me.kazuto.hcf.Config;
+import me.kazuto.hcf.Factions.Claim.ClaimingWand;
+import me.kazuto.hcf.Factions.FactionManager;
+import me.kazuto.hcf.Factions.Player.FactionPlayer;
+import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
+import me.kazuto.hcf.Factions.Types.PlayerFaction;
+import me.kazuto.hcf.Factions.Utils.CommandArgument;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class FAnnouncementArgument extends CommandArgument {
+	public FAnnouncementArgument() {
+		super("announcement", "Announcement for the faction.", "/f announcement <message>");
+	}
+
+	@Override
+	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+		if (!(commandSender instanceof Player player)) {
+			commandSender.sendMessage(String.format("%s%sYou are the console so you don't have a faction!",
+					Config.ERROR_COLOR, Config.ERROR_PREFIX));
+			return false;
+		}
+
+		if (strings.length < 2) {
+			player.sendMessage(
+					String.format("%s%sWrong usage: %s.", Config.ERROR_COLOR, Config.ERROR_PREFIX, command.getUsage()));
+			return false;
+		}
+
+		FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
+		PlayerFaction faction = FactionManager.getInstance().getFactionFromPlayer(factionPlayer);
+
+		if (faction == null) {
+			player.sendMessage(String.format("%s%sYou don't have a faction!", Config.ERROR_COLOR, Config.ERROR_PREFIX));
+			return false;
+		}
+
+		if (faction.getLeader() != factionPlayer) {
+			player.sendMessage(String.format("%s%sYou are not the leader of the faction!", Config.ERROR_COLOR,
+					Config.ERROR_PREFIX));
+			return false;
+		}
+		StringBuilder announcementMessage = new StringBuilder();
+		for (String string : strings) {
+			if (string.equalsIgnoreCase("announcement")) {
+				continue;
+			}
+			announcementMessage.append(string).append(" ");
+		}
+
+		faction.broadcastMessage(String.format("%sThe faction announcement has been changed to: %s%s",
+				Config.INFO_COLOR, Config.SECONDARY_COLOR, announcementMessage));
+		faction.setAnnouncement(announcementMessage.toString());
+		return true;
+	}
+}

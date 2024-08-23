@@ -11,9 +11,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FUninviteArgument extends CommandArgument {
-	public FUninviteArgument() {
-		super("uninvite", "Uninvite a player to the faction.", "/f uninvite <player>");
+public class FUnclaimArgument extends CommandArgument {
+	public FUnclaimArgument() {
+		super("unclaim", "Unclaim the faction land.", "/f unclaim");
 	}
 
 	@Override
@@ -25,14 +25,6 @@ public class FUninviteArgument extends CommandArgument {
 		}
 
 		FactionPlayer factionPlayer = FactionPlayerManager.getInstance().getPlayerFromUUID(player.getUniqueId());
-
-		if (FactionPlayerManager.getInstance().getPlayerFromName(strings[1]) == null) {
-			player.sendMessage(
-					String.format("%s%sThat player never joined the server.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
-			return false;
-		}
-
-		FactionPlayer uninvitedFactionPlayer = FactionPlayerManager.getInstance().getPlayerFromName(strings[1]);
 
 		if (!factionPlayer.hasAFaction()) {
 			player.sendMessage(String.format("%s%sYou are not in a faction.", Config.ERROR_COLOR, Config.ERROR_PREFIX));
@@ -46,18 +38,9 @@ public class FUninviteArgument extends CommandArgument {
 					Config.ERROR_PREFIX));
 			return false;
 		}
-
-		if (!faction.getInvitedPlayers().contains(uninvitedFactionPlayer)) {
-			player.sendMessage(String.format("%s%s%s is not invited to the faction.", Config.ERROR_COLOR,
-					Config.ERROR_PREFIX, uninvitedFactionPlayer.getName()));
-			return false;
-		}
-
-		if (uninvitedFactionPlayer.isOnline())
-			uninvitedFactionPlayer.getOfflinePlayer().getPlayer()
-					.sendMessage(String.format("%s%s has revoked your invitation to join %s.", Config.SUCCESS_COLOR,
-							factionPlayer.getName(), faction.getName()));
-		faction.uninvitePlayer(uninvitedFactionPlayer);
+		faction.broadcastMessage(
+				String.format("%s%s has unclaimed the faction land.", Config.INFO_COLOR, factionPlayer.getName()));
+		faction.setClaim(null);
 		return true;
 	}
 }

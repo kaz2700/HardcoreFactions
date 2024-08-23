@@ -19,6 +19,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.32")
     annotationProcessor("org.projectlombok:lombok:1.18.32")
     implementation("org.postgresql:postgresql:42.3.1")
+    implementation("com.google.code.gson:gson:2.11.0")
 }
 
 

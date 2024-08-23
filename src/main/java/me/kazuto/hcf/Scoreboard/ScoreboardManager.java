@@ -56,6 +56,11 @@ public class ScoreboardManager implements Listener {
 				scoreboardString.add(String.format("%sCombat Timer: %s%.1fs", Config.PRIMARY_COLOR,
 						Config.SECONDARY_COLOR, TimerManager.getInstance().getTimers().get(pvpTimer)));
 
+			Timer fHomeTimer = factionPlayer.getFHomeTimer();
+			if (TimerManager.getInstance().isActive(fHomeTimer))
+				scoreboardString.add(String.format("%sTeleporting Home: %s%.1fs", Config.PRIMARY_COLOR,
+						Config.SECONDARY_COLOR, TimerManager.getInstance().getTimers().get(fHomeTimer)));
+
 			Timer classWarmUpTimer = factionPlayer.getClassWarmUp();
 			if (TimerManager.getInstance().isActive(classWarmUpTimer))
 				scoreboardString.add(String.format("%sClass Warmup: %s%.1fs", Config.PRIMARY_COLOR,

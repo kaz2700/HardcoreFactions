@@ -19,6 +19,14 @@ public class FactionExecutor extends ArgumentExecutor {
 		addArgument(new FMapArgument());
 		addArgument(new FDepositArgument());
 		addArgument(new FWithdrawArgument());
+		addArgument(new FAnnouncementArgument());
+		addArgument(new FSetHomeArgument());
+		addArgument(new FHomeArgument());
+		addArgument(new FUnclaimArgument());
+		addArgument(new FPromoteArgument());
+		addArgument(new FDemoteArgument());
+		addArgument(new FKickArgument());
+		addArgument(new FLeaderArgument());
 	}
 }
 // todo if command is only f then show hel.p
