@@ -9,6 +9,9 @@ import me.kazuto.hcf.Factions.Player.FactionPlayer;
 import me.kazuto.hcf.Factions.Player.FactionPlayerManager;
 import me.kazuto.hcf.Factions.Types.PlayerFaction;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -105,5 +108,9 @@ public class ClaimListener implements Listener {
 			Bukkit.getServer().getPluginManager().callEvent(new FactionClaimEvent(player, faction));
 			player.getInventory().remove(ClaimingWand.getClaimingWand());
 		}
+	}
+
+	public static int getClaimCost(Location pos1, Location pos2) {
+		return Math.abs(2 * ((pos1.getBlockX() - pos2.getBlockX()) * (pos1.getBlockZ() - pos2.getBlockZ())));
 	}
 }

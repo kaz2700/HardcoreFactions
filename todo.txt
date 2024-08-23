@@ -8,10 +8,13 @@ bard effect so niggas levitate except kits maybe??? idk think
 if drop claiming wand it disapear
 cant claim in nether andend and under 1k
 fix shit & config
-world borders
 allies
 constructor that takes map stirng objcect and desierializes everyting
 activate and deactivate colors in config
+
+
+
+
 
 
 ideas:
